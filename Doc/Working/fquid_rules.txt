@@ -1,0 +1,77 @@
+Some rules about naming
+
+These are recommendations, not a requirements.
+
+
+Short names are better than long names
+  6 characters or less is ideal.
+
+The names in the FQUID are not for human consumption.
+
+But they get read by humans trying to track down problems.
+
+On naming trunks and main branches short names are better because
+    they minimize the length of the prefix of a FQUID:
+  us:ca:co:smcgov		County
+  us:ca:co:smcgov:ci:csm	City
+  us:ca:co:smcgov:smccd		Community College
+
+Long names are OK when you get to the leaves of the tree
+
+
+
+
+Existing naming standards are better than new naming standards.
+
+The existing "colloquial" standards are the names that the staff knows.
+They are generally short, 6 chars or less.
+
+They may not be perfect.  They are easier to defend:
+  "I know it is stupid, but everybody knows it."
+
+
+
+
+There can be a disconnect between human readable name and index numbers.
+  California schools are identified by a CCDDDDDSSSSSSS which is:
+    2 digit county, 5 digit district, 7 digit school CDE ??? ID.
+  District and school names are typically human readable.
+
+How do we integrate these two?
+
+
+
+
+It is recommended that in a parent name space "parent:"
+
+And child name spaces "child:"
+
+That uniqueness be preserved in both parent and child namespaces:
+
+Rules of thumb:
+  parent:foo	OK
+  parent:child:bar	OK
+  parent:child:foo	BAD
+
+This can be recursive to grand children
+
+If there is a naming conflict think of adding a prefix to both names.
+
+
+
+
+Who "gets" the popular name?
+My rule of thumb is:
+The first one wins.
+If you claim (and use) the name first, it is yours.
+
+Caveat:
+We are gentle people.
+  As Dear Abby might say: "It is rude to insist on your own way."
+
+If someone else wants the name and they have a good reason to want it; give it to them.
+
+A city or non-profit claims a name and a state agency prototypes a plan to use the name, it only makes sense to give the state the name.
+
+The need of the many, who know the name as a state agency, out weigh the needs of the few, who are the city or non-profit.
+

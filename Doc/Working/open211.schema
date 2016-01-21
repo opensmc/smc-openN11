@@ -1,0 +1,146 @@
+Unique ID components:
+ResourceAgency (text): 
+ResourceAgencyAbbrv (text): 
+ResourceAgencyNum (numeric): 
+ParentAgency (text): 
+ParentAgencyNum (numeric): 
+
+Object generic data:
+PublicName (text): 
+AlternateName (text): 
+OfficialName (text): 
+
+Location data:
+PhysicalAddress1 (text): 
+PhysicalAddress2 (text): 
+PhysicalCity (text): 
+PhysicalCounty (text): 
+PhysicalStateProvince (text): 
+PhysicalPostalCode (text): 
+PhysicalCountry (text): 
+Latitude (numeric): 
+Longitude (numeric): 
+
+HoursOfOperation (text): 
+DisabilitiesAccess (text): 
+PhysicalLocationDescription (text): 
+BusServiceAccess (text): 
+PublicAccessTransportation (text): 
+
+
+LanguagesOffered (text): 
+PhoneMain (text): 
+PhoneFax (text): 
+PhoneTTY (text): 
+PhoneTollFree (text): 
+PhoneNumberHotline (text): 
+PhoneNumberBusinessLine (text): 
+PhoneNumberOutOfArea (text): 
+PhoneNumberAfterHours (text): 
+EmailAddressMain (text): 
+WebsiteAddress (text): 
+
+AgencyStatus (text): 
+AgencyClassification (text): 
+AgencyDescription (text): 
+CoverageArea (text): 
+CoverageAreaText (text): 
+
+SeniorWorkerName (text): 
+SeniorWorkerTitle (text): 
+SeniorWorkerEmailAddress (text): 
+SeniorWorkerPhoneNumber (text): 
+MainContactName (text): 
+MainContactTitle (text): 
+MainContactEmailAddress (text): 
+MainContactPhoneNumber (text): 
+MainContactType (text): 
+
+TemporaryMessage (text): 
+TemporaryMessageAppears (timestamp): 
+TemporaryMessageExpires (timestamp): 
+EnteredOn (timestamp): 
+UpdatedOn (timestamp): 
+
+MadeInactiveOn (timestamp???): 
+InternalNotes (text): 
+InternalNotesForEditorsAndViewers (text): 
+HighlightedResource (text): 
+
+RecordOwner (text): 
+LastVerifiedOn (timestamp): 
+LastVerifiedByName (text): 
+LastVerifiedByTitle (text): 
+LastVerifiedByPhoneNumber (text): 
+LastVerifiedByEmailAddress (text): 
+LastVerificationApprovedBy (text): 
+Categories (text): 
+
+AvailableForDirectory (text): 
+AvailableForReferral (text): 
+AvailableForResearch (text): 
+SearchHints (numeric): 
+ExcludeFromWebsite (text): 
+ExcludeFromDirectory (text): 
+
+PreferredProvider (text): 
+ConnectsToSiteNum (text): 
+ConnectsToProgramNum (text): 
+
+TaxonomyLevelName (text): 
+TaxonomyTerm (text): 
+TaxonomyTerms (text): 
+TaxonomyTermsNotDeactivated (text): 
+TaxonomyCodes (text): 
+
+LicenseAccreditation (text): 
+IRSStatus (text): 
+FEIN (text): 
+YearIncorporated (numeric): 
+AnnualBudgetTotal (text): 
+LegalStatus (text): 
+SourceOfFunds (text): 
+
+FeeStructureSource (text): 
+ApplicationProcess (text): 
+ResourceInfo (text): 
+DocumentsRequired (text): 
+ServiceNotAlwaysAvailability (text): 
+CapacityType (text): 
+ServiceCapacity (text): 
+Coverage (text): 
+Eligibility (text): 
+
+Address1Address1 (text): 
+Address1Address2 (text): 
+Address1City (text): 
+Address1County (text): 
+Address1StateProvince (text): 
+Address1PostalCode (numeric): 
+Address1Country (text): 
+
+Phone1Name (text): 
+Phone1Number (text): 
+Phone1Description (text): 
+
+Text1Name (text): 
+Text1Number (text): 
+Text1Description (text): 
+
+DateTime1Name (text): 
+DateTime1Number (timestamp): 
+DateTime1Description (text): 
+
+Hours1Name (text):
+Hours1Start (timestamp):
+Hours1End (timestamp):
+Hours1Days (text):
+
+
+MailingAttentionName (text): 
+MailingAddress1 (text): 
+MailingAddress2 (text): 
+MailingCity (text): 
+MailingStateProvince (text): 
+MailingPostalCode (text): 
+MailingCountry (text): 

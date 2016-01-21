@@ -1,0 +1,86 @@
+Storing open211 data in a json NoSQL Document data store
+
+A NoSQL document database stores all the data for a single item (row) in a separate data page as unstructured(?) json data.  100 rows in a SQL database becomes 100 separate pages of data.  Any type of data in any order can be stored in these pages.  Different pages do not have to contain the same data fields.  For performance you can create indexes of specific data fields.  Queries to the json API interface return the entire json data page for each matching item (row).
+
+NoSQL documents are normally stored as pages in memory.  Postgress support json pages as a table entry and can generate indexs for specific json entries.  Json data pages can simply stored in separate small text files in a file system.
+
+Storing data in local file based data store has many advantages:
+Simple management.  Standard Linux tools can be used to search and analyze the data.
+Flexibility:  Text editing tools can be used to prototype data.
+Debugging:  Standard tools can be used to analyze and fix the data.
+Change tracking: version control using git
+
+
+Json Schema element definition:
+{
+  type: text
+  id: field_name
+  title: "short UI text name"
+  description: "Longer text describing data field.
+    Could be used in pop-up or flyover description text."
+}
+
+Simple location json schema:
+(type is "text" unless otherwise noted.)
+
+# location
+{
+  RowID: for backwards csv compatibility
+  UID;
+  OrgID;
+  LocName;
+  LocDescription;
+  LocType;
+  LocKeywords;
+  LocHours;
+  HandiAccom;
+  Address {
+    LocStAddrN+1;
+    City;
+    County;
+    State;
+    Zipcode;
+    Country;
+  }
+  PhoneN+1 {
+    PhoneName;
+    PhoneTitle;
+    PhoneNum;
+  }
+  EmailN+1 {
+    EmailName;
+    EmailTitle;
+    EmailAddr;
+  }
+  URLN+1 {
+    URLName;
+    URLAddr;
+  }
+}
+
+ParkLoc:
+{
+  Requires Location;
+  Picnic;
+  Playground;
+  Playfields;
+  Bathroom;
+  RecCenter;
+  Parking;
+  ParkingHours;
+  Trails;
+  History;
+}
+
+Core: Core schema used by all types
+Core.Parks: Core schema for Park type services
+Core.Parks.Trail: Additional data fields for park trails
+
+Additional files:
+defaults: fields with default values.
+
+
+L1:cc
+L2:st
+L3:county
+L4:city

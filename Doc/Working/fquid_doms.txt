@@ -1,0 +1,104 @@
+A sample of org_fquid names
+Fully Qualified Uniqie ID (FQUID)
+Pronounced: f-quid
+
+California Counties
+us:ca:co:sfgov:
+
+us:ca:co:acgov:
+us:ca:co:acgov:gov:
+us:ca:co:acgov:gov:org-dir:
+us:ca:co:acgov:gov:parks:
+us:ca:co:acgov:gov:staff-dir:
+us:ca:co:acgov:parks:
+
+us:ca:co:smcgov:
+
+County of San Mateo government information, departments and services
+us:ca:co:smcgov:gov:
+us:ca:co:smcgov:gov:supervisors:
+us:ca:co:smcgov:gov:supervisors:district1:
+us:ca:co:smcgov:gov:supervisors:district2:
+us:ca:co:smcgov:gov:supervisors:district3:
+us:ca:co:smcgov:gov:supervisors:district4:
+us:ca:co:smcgov:gov:supervisors:district5:
+us:ca:co:smcgov:gov:supervisors:manager:
+us:ca:co:smcgov:gov:court:
+us:ca:co:smcgov:gov:da:
+us:ca:co:smcgov:gov:elections:
+us:ca:co:smcgov:gov:fire:
+us:ca:co:smcgov:gov:health:
+us:ca:co:smcgov:gov:housing:
+us:ca:co:smcgov:gov:np:
+us:ca:co:smcgov:gov:parks:
+
+San Mateo county wide services
+us:ca:co:smcgov:emgsvcs:
+us:ca:co:smcgov:health:
+us:ca:co:smcgov:humsvcs:
+us:ca:co:smcgov:libraries:
+us:ca:co:smcgov:parks:
+
+San Mateo city wide services
+us:ca:co:smcgov:ci:csm:
+us:ca:co:smcgov:ci:csm:health:
+us:ca:co:smcgov:ci:csm:library:
+us:ca:co:smcgov:ci:csm:nonprofits:
+us:ca:co:smcgov:ci:csm:parks:
+
+City of San Mateo information, departments and services
+us:ca:co:smcgov:ci:csm:gov:
+us:ca:co:smcgov:ci:csm:gov:councl:
+us:ca:co:smcgov:ci:csm:gov:parks:
+us:ca:co:smcgov:ci:csm:health:
+us:ca:co:smcgov:ci:csm:library:
+us:ca:co:smcgov:ci:csm:nonprofits:
+us:ca:co:smcgov:ci:csm:parks:
+
+
+California school distrticts and schools
+us:ca:k-12:co:smcoe:dist:smcoe:gov:
+us:ca:k-12:co:smcoe:dist:smcoe:gov:org-dir:
+us:ca:k-12:co:smcoe:dist:smcoe:gov:staff-dir:
+us:ca:k-12:co:smcoe:dist:sanmateo-fostercity:
+us:ca:k-12:co:smcoe:dist:sanmateo-fostercity:org-dir:
+us:ca:k-12:co:smcoe:dist:sanmateo-fostercity:staff-dir:
+us:ca:k-12:co:smcoe:dist:sanmateo-fostercity:sch:audubon-elmnt:
+us:ca:k-12:co:smcoe:dist:sanmateo-fostercity:sch:baysidestem-acdmy:
+us:ca:k-12:co:smcoe:dist:sanmateo-fostercity:sch:baywood-elmnt:
+us:ca:k-12:co:smcoe:dist:sanmateo-fostercity:sch:beresford-elmnt:
+us:ca:k-12:co:smcoe:dist:sanmateo-fostercity:sch:borelmiddle:
+us:ca:k-12:co:smcoe:dist:sanmateo-fostercity:sch:bowditchmiddle:
+
+Universities and colleges
+us:ca:edu:smccd:  San Mateo Community College Distrtict
+us:ca:edu:stanford:
+
+Californian State government: information, departments and services
+us:ca:gov:org-dir:
+us:ca:gov:staff-dir:
+us:ca:gov:edd:
+us:ca:gov:health:
+us:ca:gov:parks:
+us:ca:gov:rehab:
+
+Californian State Representitives
+us:ca:gov:assembly:19th:
+us:ca:gov:senate:dist08:
+
+Federal government: information, departments and services
+us:gov:cdc:
+us:gov:cdc:org-dir:
+us:gov:cdc:staff-dir:
+us:gov:dod:
+us:gov:ssa:
+us:gov:usps:
+
+Federal Representitives
+us:gov:whitehouse:
+us:gov:whitehouse:org-dir:
+us:gov:whitehouse:staff-dir:
+us:gov:house:
+us:gov:senate:
+us:gov:house:
+us:gov:senate:

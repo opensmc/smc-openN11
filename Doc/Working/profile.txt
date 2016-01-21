@@ -1,0 +1,13 @@
+Profiles
+
+The layered schema design isolates data properties complexity in one service type's schema from a different service type.  Because the schemas should be comprehensive to minimize the need for exception schemas, the combined schema for a service may have hundreds of different data properties.
+
+Today most service agencies are only able to provide a small subset of these data properties.  Why scare them with a data request that includes a document with hundreds of data fields they can fill in?
+
+A profile is a defined subset of the schema.  Minimal required data properties, data properies the agency already has and a limited number of desired data properties.  The idea is to define the data props that are important and commonly available.  If an organization wants to publish additional data, they can using data properties from the full schema.
+
+The other use of profiles is to convert a json style NoSQL document based data store into an Open Data tablular (CSV based) dataset.  The profile defines which columns are extracted from the json data which turn into column names.
+
+A dataset would have data for several different types of services.  Data for all of these services would be stored in the json page (document) for a particular service provider (Unique ID).  Data for each service type could be extracted from all of the matching json pages and converted to a CSV file to be imported into an Open Data dataset on an Open Data portal.  The profile would define and control this conversion.
+
+The idea is rather than telling the agency "here are the data properties we want" you ask "what data properties do you currently have?" and then figure out to map this to the open211 data schemas.

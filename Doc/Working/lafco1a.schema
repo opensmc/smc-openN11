@@ -1,0 +1,157 @@
+The open211 json data for the San Mateo County LAFCo organization
+
+The format is json (java script notaion)
+json is used by modern web based APIs (application programming interfaces).  It is very readable.  Ask if you don't understand something.
+
+This entry is my "base level data" information.  The kind of information that if you were going someplace and it was missing in the app, you would goole for it.
+
+In particular if an app queries:
+  us:ca:co:smcgov:*
+The app will  git this limited data about LAFCo.
+
+On the otherhand if they query:
+  us:ca:co:smcgov:lafco:*
+The app will get a much richer set of LAFCo data.
+  All the cities, boards and commissions.
+  Information about LAFCo itself.
+This is descussed in a separate document
+
+us:ca:co:smcgov:lafco {
+
+  name_short: San Mateo LAFCo
+  name_long: San Mateo Local Agency Formation Commission,
+
+  contact {
+    name: main-desk
+    address: 455 County Center, 2nd Floor, Redwood City, CA 94063
+    phone: 650-363-4224,
+    fax: 650-363-4849,
+    email: main-desk@sanmateolafco.org,
+    homepage: http://www.sanmateolafco.org/,
+
+    # these are data fields used by apps to display information about the organization.
+    hours: 9:00 am to 5:00 pm, Monday through Friday
+    services: Oversees cities, independent special districts, and many of the 33 County-governed special districts serving San Mateo County
+    discription: San Mateo LAFCo is an independent commission with jurisdiction over the boundaries of the 20 cities, 22 independent special districts, and many of the 33 County-governed special districts serving San Mateo County.
+    tags: cities, independent special districts, county-governed special districts, maps, district boundary maps,
+    type: civic, boards, boundaries
+    portal: open211://us:ca:co:smc:lafco
+    resp_person: {
+      name: Martha Poyatos,
+      title: Executive Officer,
+      location: open211://us:ca:co:smcgov:lafco:address
+      phone: 650-555-1212,
+      email: MPoyatos@smcgov.org,
+      homepage: http://www.smcgov.org/personnel/???
+    }
+
+    # here is the actual data published by LAFCo
+    reflist: open211:us:ca:co:smcgov:lafco:cities
+    reflist: open211:us:ca:co:smcgov:lafco:district:a
+    reflist: open211:us:ca:co:smcgov:lafco:district:b
+    reflist: open211:us:ca:co:smcgov:lafco:ca
+  }
+  
+
+  reflist: {
+    # this is metadata or data about the data
+    org_uid: cities
+    org_fquid: us:ca:co:smcgov:lafco:cities
+    auth: us:ca:co:smcgov:lafco
+    auth_source: http://lafco.smcgov.org
+    auth_owner: resp_person: Martha Poyatos
+    auth_ok: authticated
+    updated: datetime
+
+    # this is the data
+    name_short: Cities
+    name_long: Cities in San Mateo County
+    csm: { ... }
+    rwc: {
+      org_uid: lafco-1
+      org_fquid: us:ca:co:smcgov:lafco:cities:lafco-1
+      org_uid: rwc
+      name_short: Redwood City
+      name_long: City of Redwood City
+      incorporation: May 11, 1867; charter adopted 1929, last amended November 1987
+      homepage: http://www.redwoodcity.org/
+      map: http://lafco.smcgov.org/documents/redwood-city-city
+      budget: http://www.redwoodcity.org/finance/fininfo/budget/index.html
+      services: Planning and building, police, fire, human services assistance, library, parks and recreation, water, sewer, storm drainage, street maintenance, deep-water port
+      area: 33.7 square miles
+      population: 79,074
+      popdatasrc: URL of CA Department of Finance 2013
+      Sphere_influence: Boundaries of 1984 plus the unincorporated communities of North Fair Oaks, Emerald Lake Hills, Kensington Square, Oak Knoll, Sequoia Tract, and Trailer Villa
+
+
+General Inquiries: (650) 780-7000
+City Hall
+1017 Middlefield Road
+Redwood City, CA 94063
+Hours: Monday through Friday, 8:00 am – 5:00 pm
+mail@redwoodcity.org
+www.redwoodcity.org
+Mailing Address:
+P.O. Box 391
+Redwood City, CA 94064-0391
+MELISSA STEVENSON DIAZ, City Manager
+mdiaz@redwoodcity.org
+Phone: (650) 780-7301
+Fax: (650) 780-7225
+
+    
+
+
+  org_uid: city_council
+  org_fquid: us:ca:co:smcgov:lafco:cities:rwc:city_council
+  org_uid: council
+  name_short: City Council
+  name_long: Redwood City City Council
+  discription: The City of Redwood City is governed by a seven-member city council elected to four-year terms.
+  meetings_text: The city council meets regularly ...
+  meetings: URL to rwc meeting page
+  council: {
+    contact {
+      ref_fquid: open211://us:ca:ci:rwc:council:member-361
+      name: John D. Seybert
+      title: Mayor
+      termend: 2017
+    }
+    contact {
+      ref_fquid: open211://us:ca:ci:rwc:council:member-369
+      name: IAN BAIN
+      title: Vice Mayor 
+      termend: 2019
+    }
+    contact {
+      ref_fquid: open211://us:ca:ci:rwc:council:member-365
+      name: ALICIA C. AGUIRRE 
+      title: Council Member
+      termend: 2019
+    }
+    contact {
+      ref_fquid: open211://us:ca:ci:rwc:council:member-364
+      name: JANET BORGENS 
+      title: Council Member
+      termend: 2019
+    }
+    contact {
+      ref_fquid: open211://us:ca:ci:rwc:council:member-362
+      name: JEFFREY GEE 
+      title: Council Member
+      termend: 2017
+    }
+    contact {
+      ref_fquid: open211://us:ca:ci:rwc:council:member-363
+      name: DIANE HOWARD 
+      title: Council Member
+      termend: 2017
+    }
+    contact {
+      ref_fquid: open211://us:ca:ci:rwc:council:member-367
+      name: SHELLY MASUR 
+      title: Council Member
+      termend: 2019
+    }
+  
+  }

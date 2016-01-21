@@ -1,0 +1,24 @@
+3 classes:
+Busissness
+Creatvive work
+Event
+
+Schema.org is optimised for search engines.  Search engines are concerned with organizing large amounts of data.  Search engines do not try to organize *all* the information.  Data that does not map into existing properties 
+
+Furor: Library schema
+
+
+
+3 types of local UIDs:
+  Human readable
+  Primary keys
+  Transaction keys
+
+Human readable UIDs
+Generally high level items of limited number: locations, departments, services
+
+
+Primary key UIDs
+
+Transaction key UIDs
+

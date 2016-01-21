@@ -1,0 +1,596 @@
+json -vs- CSV
+CSV is a tradtitional format.  Everybody understands it.  CVS tables do not scale horizontally, number of columns.  If the aggrget of the data properies (fields or columns) is 100, then each and every row has to have 100 elements even if the element is the null element.  If you expand human services to government or public servies, then the number of properties becomes thousands.
+
+It looks like open referral tries to mitigate this by use of Entities, organization, location, physical_address.  Each is a separate CSV file.  One element can reference a $type_id in a field and the app will make a second query for that item or you assume the client has a cached copy of the CSV table.  It works OK because most queried $type_id are in the local cache.  We tend to ask for the same things over and over.
+
+While a CVS format is simple, the draw back is that looking up a single item may take several lookup requests.  Once for the object, then for other referenced objects (CSV files).  Each returned CSV file must include all of the fields in the row of that CVS table even null elements.
+
+The json format is a set of key value pairs stored in a heiarchical structure.  It is a free form format.  Empty or null elements are simply not included.  If a schema has 100 properties but the particular element only has 5, only 5 elelment plus metadata are included.  Elements are independent of each other except as they are related by heiarchicy.  In the parks department one park may have playgrounds and playing fields while another park may have campgrounds and trails.  Very differnt data properties.  A CSV format for both would have to include both for each row of data.  The json data store only keeps the elements used.
+
+The json frees the schema designer from limiting number of properties.  If a schema defines a property it only means that the back end data service and API will understand and support the property.  It does not imply the propterty should normally be used.  It does not imply a client should support it.  But if the data provider wants to include that property type, they can because the server understands the request.  Unused propeties do not use any storage or bandwith resources.  Implicit in this definition is that properties in one service type schema do not imply anything about properties of another type of service.  One schema can have hundreds of properties.  The next only 10.  A json document store does not care.  Each entry (row) is a page with N+1 properties.
+
+
+The N+1 problem:
+The N+1 problem is a CSV format problem.  In a CVS format dataset when storing data in a replicated field such as address1, address2, addressN+1, you must create a column for each value of N even if the row only stores a null in that column.  In a CSV format you have to decide how many street address properties you are goint to allow.  Used to be 2, now it is 4.  How many in the future?  Choose too many and the CSV format becomes very wide.  I.e. lots of columns.
+
+json does not have the N+1 problem:
+  You want a single address property?  Fine: address.
+  You want 4 address properties? Fine: address1-address4.
+  You want 99 address properties? Fine: address1-address99.
+  Or 99 plain address properties with no garuenteed order.
+And you can change this on a per instance (item, element, row?) basis not per CSV file basis.
+
+Applying the N+1 solution:
+
+Example using addresses:
+The schema defines two addresses: physical_address and postal_address.  Two is a compromise because each address has a lot of properties.  Add an address and you add a column or lookup.  In each address you define 4 (street) address properties.  Used to be 2, now its 4.  Both of these are examples of the N+1 problem.  You know you want one, you may want another, and maybe another, and maybe another...
+
+If you define the address as a N+1 type record, then one or more instances of the record are allowed.  Just address with the zero implied, or address1, address2, addressN+1.  For compatibility with a CSV format 1-4 are required.
+
+A differnt way to look at the address property is as a type:value pair.  Address1-4 imply street address properties.  Then you have city state, county and zipcode which may not make sense in other parts of the world.
+
+If the address property is a type:value pair, then you have no predefined address properties.
+
+The US profile would look like:
+Address {
+  suite: string
+  street: string
+  city: string
+  state: string
+  country: string
+  zipcode: number
+  longitude: degrees X decimals
+  latitude: degrees.Xdecimals
+}
+
+The vatican might look like this:
+Address {
+  room: string
+  order: string
+  holy_bldg: string
+  street: string
+  country: string
+}
+
+The only property type required is country.
+
+If the property had two street addresses then use street and street1.
+
+You could define a metro area with multiple city or zipcode properties and no street properties.
+
+It might make sense for first generation data stores and applications to allow other types of fields in the address: phone, email, contact, url.  But this is strictly a bootstrapping step.
+
+Address elements:
+Extending the above discussion about N+1 address properties to physical -vs- postal addresses this type of address block should be a N+1 type element.  The address block includes a type property.  A property that uses an address can simply use address_id with either a specific type or a generic null type.  Need more addresses use address_id1, address_idN+1...
+
+Most locations would have a single main or default address.  But Consider a hospital covering a city block:
+hospital {
+  physical:
+  postal:
+  emergency:
+  shipping:
+  parking:
+}
+
+The parent property could require a minimum of a physical or postal address.
+
+
+Putting it all together:
+Start with the address_instance which is a single address:
+address_instance {
+  type,
+  address_element_N+1,
+  metadata
+}
+
+With the address_element_N+1 array having a default profile of:
+address {
+  type: string,
+  address_id: unique_string,
+  street: string,
+  city: string,
+  state: string,
+  country: string,
+  zipcode: number
+  longitude: degrees.Xdecimals
+  latitude: degrees.Xdecimals
+}
+
+A location would have address_instance_N+1.
+location: {
+  type: string,
+  location_specific: properties,
+  address_N+1: address_id,
+  metadata
+}
+
+Most locations only have a single address.  But a large hospital may have multiple addresses:
+Mills Peninsula {
+  type: string,
+  physical: address_id,
+  postal: address_id,
+  emergency: address_id,
+  shipping: address_id,
+  parking: address_id,
+  location_specific: properties,
+  metadata
+}
+
+Final thought:
+Anytime you see either:
+  property_name1, property_name2, property_name3...
+  property_type1, property_type2, property_type3...  
+
+Consider them as:
+  property_name_N+1
+  property_type_N+1
+
+What about the "one off" propterties used by different Elements or data sources?
+Grow the base property_name or property_type schemas to encompass most of the extra property types from different data sources.
+Properties used outside of this are the wild west.  You can populate them, but who will use them?  Just your app?  OK, sounds cool.
+
+Using lots of properties for a json based data store is OK.  You actuall only store data for the properties you are actually using.  There is no penalty for unused properties.  1,000 properties in the schema for an Element but your instance only uses 20 properties?  The dataset for that instance only has 20 properties plus metadata.  The other 980 properties return a null value or a default value inheartited from the parent.
+
+A final thought.  The main draw back of a json based NoSQL document data store is that queries on non-indexed properties is expensive.  To get search performance you need lots of indexes.
+
+Questions about netiquette or maybe slackiquette.  Is this an inaproprate message for a slash channel?  Should I have attached it as a file?  Should I talk about this to a mailing list or just a few email addresses/slack users?  Is there a better slicak channel to have this discussion?  Or am I right that the sf-openreferral channel is the current active channel with other brigades listing?  Am I using the wrong terminolgy?  Anyone want to correct my terminology?  Questions, questions, questions...
+
+
+
+
+contact could be a:
+  title/function:  main desk, benifits_coordinator, manager
+  person: full name, preferred name, nick name
+
+type211 {
+  "name": "formalname",
+  "type": "string",
+  "title": "short readable name", # optional: Can be use to lable a cell displaying data
+  "description": "Longer readable description", # optional: Can be used in an informationional popup
+  "example": "sample or default value" # optional: Can be used as default for new entry
+  "metadata": "pointer to open211 type metadata",  
+  },
+
+
+metadata211 {
+# information unique to the property itself
+  id (text), # a local unique ID like a record id
+  resource_id (text), # optional, fully qualified unique id
+  resource_uuid (uuid), # optional, UUID (registered?)
+  checksum (md5sum), # checksum of fully populated json data (full record request)
+
+# following can be inherated from the properties parent.
+
+# security information, required but can be inherited from parent:
+  resp_person (contact_id,contact_uuid),
+  data_owner (contact_id,contact_uuid),
+  privacy (tags), # public, private, oauth, other
+  auth_record (tags), # auth, nonauth, null
+
+# cross reference information:
+  organization_id_N+1 (organization_id, organization_uuid),
+  location_id_N+1 (location_id, location_uuid),
+  service_id_N+1 (service_id, service_uuid),
+
+update related:
+last_action_date (datetime),
+last_action_type (string),
+previous_value (string),
+replacement_value (string),
+updated_by (contact_id,contact_uuid),
+
+# information about this property
+  contact_N+1 (contact_id,contact_uuid),
+  phone_N+1 (phone),
+  url_N+1 (url|uri?),
+  email_N+1 (email,social media),
+
+# schema related
+"required (tags), # must/may/may not
+i18n (tags), # en, es, zh
+index (tags), # properties to index (server) or are indexed (api call)
+
+                        }
+In a cvs file for addressN+1, N=3, N+1=4 so address1, address2, address3, address4
+
+<a name="address">
+Address Formatting
+
+At the time this document was drafted, a standard addressing format has not been established. ISO 19160  is in the preliminary stages of an addressing standard but has not yet produced a standard. Based on address standards by country from the Universal Postal Union,  the following format will capture the majority of addresses in use globally.
+
+    address_1
+    address_2
+    address_3
+    adderss_4
+    city/locality
+    state/province/region
+    postal code
+    country
+
+Because of the variety of addressing systems, every field is composed of alphanumeric characters. The country field uses ISO-3166 alpha 2 codes.
+
+  <tr>
+  <td>City</td>
+  <td>The city where the Organization, Service or Location resides.</td>
+  <td>Redwood City</td>
+  <td>required</td>
+  </tr>
+
+  <tr>
+  <td>Country</td>
+  <td>The country where the Organization, Service or Location is located. Uses ISO 3361-1 country codes (two letter abbreviations)</td>
+  <td>US</td>
+  <td>required</td>
+  </tr>
+
+  <tr>
+  <td>Country Code Prefix</td>
+  <td>The country code prefix of the phone.</td>
+  <td>19</td>
+  <td>optional</td>
+  </tr>
+
+  <tr>
+  <td>Location Id</td>
+  <td>Each service can include a location referenced by a Location.Id</td>
+  <td>1CB7893F-86A1-49FD-9193-87C233E2ADB2</td>
+  <td>required</td>
+  </tr>
+
+  <tr>
+  <td>Physical Address</td>
+  <td>A physical address describes the location of a service or organization.</td>
+  <td>1510 South Hackberry
+San Antonio, TX 78210</td>
+  <td>recommended</td>
+  </tr>
+
+  <tr>
+  <td>Name</td>
+  <td>The official or public name of the organization, service, program, location, or contact</td>
+  <td>Haven for Hope</td>
+  <td>required</td>
+  </tr>
+
+  <tr>
+  <td>Organization Id</td>
+  <td>The organization.Id is the unique identifier for an organization</td>
+  <td>BEC0BA53-4A24-400F-8F05-A24831D54618</td>
+  <td>required</td>
+  </tr>
+
+  <tr>
+  <td>Contact Id</td>
+  <td>contact.Id is the unique identifier for a contact</td>
+  <td>388BD194-5731-4D66-B8FC-F48A84DDD1FC</td>
+  <td>optional</td>
+  </tr>
+
+  <tr>
+  <td>Phone</td>
+  <td>The phone number used to contact an organization, service, or location.</td>
+  <td>210-512-3345</td>
+  <td>required</td>
+  </tr>
+
+  <tr>
+  <td>Postal Code</td>
+  <td>The postal code that the Organization, Service or Location resides. Zip+4 is optional in the US.</td>
+  <td>99043</td>
+  <td>required</td>
+  </tr>
+
+  <tr>
+  <td>State/Province</td>
+  <td>The state (or province) that the Organization, Service or Location resides. Uses ISO 3361-2 state codes (two letter abbreviations), for example in the US and Canada</td>
+  <td>CA</td>
+  <td>required</td>
+  </tr>
+
+  <tr>
+  <td>Address_1</td>
+  <td>This property contains the street number, prefix, street name, and suffix.</td>
+  <td>2022 S. Palmetto Ave</td>
+  <td>required</td>
+  </tr>
+
+  <tr>
+  <td>Address_2</td>
+  <td>This property contains additional address information such as the suite.</td>
+  <td>Suite 201</td>
+  <td>optional</td>
+  </tr>
+
+  <tr>
+  <td>Address_3</td>
+  <td>This property contains additional address information.</td>
+  <td></td>
+  <td>optional</td>
+  </tr>
+
+  <tr>
+  <td>Address_4</td>
+  <td>This property contains additional address information.</td>
+  <td></td>
+  <td>optional</td>
+  </tr>
+
+  <tr>
+  <td>physical_address</td>
+  <td>id<br>
+location_id<br>
+attention<br>
+address_1<br>
+address_2<br>
+address_3<br>
+address_4<br>
+city<br>
+state_province<br>
+postal_code<br>
+country</td>
+  </tr>
+
+{
+  "name": "physical_address",
+  "path": "address.{csv,json,xml}",
+  "format": "{csv,json,xml}",
+  "mediatype": "text/{csv,json,xml}",
+  "schema": {
+    "fields": [
+      {
+        "name": "id",
+"title": "address_id",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      },
+      {
+        "name": "location_id",
+"title": "foo",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      },
+      {
+        "name": "location_uuid",
+"title": "foo",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      },
+      {
+        "name": "attention",
+"title": "foo",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      },
+      {
+        "name": "room/suite",
+"title": "foo",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      },
+      {
+        "name": "address_N+1",
+"title": "foo",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      },
+      {
+        "name": "city",
+"title": "foo",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      },
+      {
+        "name": "state_province",
+"title": "foo",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      },
+      {
+        "name": "postal_code",
+"title": "foo",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      },
+      {
+        "name": "country",
+"title": "foo",
+        "description": "baz",
+        "type": "string",
+"example": "bar"
+      }
+    ],
+    "primaryKey": "id",
+    "foreignKeys": [
+      {
+        "fields": "location_id",
+        "reference": {
+          "resource": "location.{csv,json,xml}",
+          "fields": "id"
+        }
+      }
+    ]
+    "primaryKey": "uuid",
+    "foreignKeys": [
+      {
+        "fields": "location_uuid",
+        "reference": {
+          "resource": "location.{csv,json,xml}",
+          "fields": "uuid"
+        }
+      }
+    ]
+  }
+},
+
+            {
+                "name": "metadata",
+                "path": "metadata.csv",
+                "format": "csv",
+                "mediatype": "text/csv",
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "id",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "resource_id",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "last_action_date",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "last_action_type",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "field_name",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "previous_value",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "replacement_value",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "updated_by",
+                            "description": "",
+                            "type": "string"
+                        }
+                    ],
+                    "primaryKey": "id",
+                    "foreignKeys": [
+                        {
+                            "fields": "organization_id",
+                            "reference": {
+                                "resource": "organization.csv",
+                                "fields": "id"
+                            }
+                        },
+                        {
+                            "fields": "location_id",
+                            "reference": {
+                                "resource": "location.csv",
+                                "fields": "id"
+                            }
+                        },
+                        {
+                            "fields": "service_id",
+                            "reference": {
+                                "resource": "service.csv",
+                                "fields": "id"
+                            }
+                        },
+                        {
+                            "fields": "contact_id",
+                            "reference": {
+                                "resource": "contact.csv",
+                                "fields": "id"
+                            }
+                        }
+                        
+                    ]
+                }
+            },
+
+           {
+                "name": "meta_table_description",
+                "path": "meta_table_description.csv",
+                "format": "csv",
+                "mediatype": "text/csv",
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "id",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "name",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "language",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "character_set",
+                            "description": "",
+                            "type": "string"
+                        }
+                    ],
+                    "primaryKey": "id"
+                }
+            }
+        ]
+    }
+            {
+                "name": "phone",
+                "path": "phone.csv",
+                "format": "csv",
+                "mediatype": "text/csv",
+                        {
+                            "name": "alternate_name",
+                            "type": "string"
+                        },
+                "schema": {
+                    "fields": [
+                        {
+                            "name": "id",
+                            "description": "",
+                            "type": "string"
+                        },{
+                            "name": "location_id",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "service_id",
+                            "description": "",
+                            "type": "string"
+                        },
+                        {
+                            "name": "organization_id",
+                            "description": "",
+                            "type": "string"
+                        },                    
+                        {
+                            "name": "contact_id",
+                            "description": "",
+                            "type": "string"
+                        },                    
+                    ],
+
+parking_address
+mailing_address
+social media
+
+
+auth request flag for API
+schema different than parent
+
+
+#################

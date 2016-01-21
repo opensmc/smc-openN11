@@ -1,0 +1,216 @@
+Moncef,
+My name is Robert Harker and I live in San Mateo city and county.  I have recently become involved in the County's Socrata Open Data portal (data.smcgov.org) and Code for America.  I am currently helping John Ridener set up a Code for America Brigade in San Mateo called OpenSMC.  John is the County's Open Data project manager.  We are hoping to launch Jan 2016.  We have a leadership team.  The County is providing a weekly meeting room for the next year.
+
+My personal focus has been adding "interesting data" to the County's Socrata Open Data portal, data.smcgov.org.  HSA's smc-connect social services dataset is high quality "interesting data".  I would like to add it to the Open Data portal.  I have been looking at various open211 services director projects.  I am impressed with the ohana/smc-connect project.  It looks like a complete solution.  Both apps and an admin console that stores and accesses the data via a SaaS (PaaS?) API.  
+
+I am wanting to fork the ohana code and hack it to use the County's Socrata Open Data API.  I want to make this our soon-to-be brigade's first major project.  Yes, I realize this is a tall order.  Defintely not just few hackathons project.  My first task is to import the current smc-connect dataset into Socrata.  This allows me to learn about using the Socrata API.  Then I can look at code to scope the project.
+
+I am asking for your help getting started with this project and setting up my dev environment.  I would like your feedback on my ideas on re-achticecting the json schema to allow many different services types.  I thinking of using the somewhat novel approach of a minimialist base level json schema that is extended with service type specific json schema extensions.  What I am calling profiles.  A way to get around the one size fits all problem while providing base level data.  Social services would have a very differnt profile than libraries or parks.  Libraries and parks provide public service. Correct?
+
+My background:  I am a semi-retired Linux sysadmin who helped set up Yahoo Sports CI process.  I am the Ops side of DevOps.  I am not a coder.  I am a web farm wrangler.  I can code and C, perl and php but haven't in a while.  I prefer bash.  I comfortable with development/deployment in a highly automated environment.  I enjoy making complex DevOps environments work.  It looks like this project is written in ruby, so I will have to learn ruby.  I have some background as an early user of puppet and writing my own manifests so ruby is not completely new but it has been several years.  My linked id is: rlh100.
+
+Assuming you are willing to help me:
+What github repository should I fork from?
+Ohana, CfDC open211, sf-openresources, smc-connect?
+I am particularly interested in the admin console and not data scraping.
+
+Is there a proper documented json (xml?) schema for service directory data?
+Are there design docs or discussions on the design of this schema?
+Do you know of similar non-Code for America projects that are further ahead?
+
+Can you give me an API URL (URI?) to dump the entire public part of the smc-connect data set including its json schema?
+I feel like a NooB.  I have tried but do not have the right knowlege.
+
+Are there design documentation for ohana or smc-connect?
+
+Hopefully, thanks in advance,
+RLH
+Robert Harker
+harker@harker.com
+
+
+
+
+open211 Services Directory Open Data Standard
+
+Background:
+Homeless, low-incom services directory is a popular subject of Code for America Brigade.  But social services are not the only type of public services.  Health care, schools, libraries, parks, etc.  A unified Open Data dataset that could work as a single directory for a diverse set of services would allow applications designed for a specific service type, homeless shelters, to be able to display basic information such as name, service type, location, phone number, hours for other types of service like libraries, clinics, parks.
+
+Problem:
+Writing a single json schema to contain all of the different types (field names) data a universal service directory is a Hurculiean task.
+
+Solution:
+Storing the data for a services direcory dataset is defined by a dataset schema.  In this proposal a open211.json schema is used.  It is a multi layer schema with a minimal base level schema common to all service types.  A per service type schema is used to add additional data types (type:id) for that service type.  Additional service type layers can be added for regional and local differences.  These service type layers are called profiles.
+
+A layered json schema provides a default set of addributes for every service type.  This allows all applications to display a basic set attributes for any service type.  Service type profile allows a class service agencies to add data fields specific to their needs: service provided, elegibily, fees, etc.  An additional profiles can be added for particular services: homeless shelter, free meals, drop in locations, counseling services, etc.
+
+
+open211.base.json:
+  Service type, service name, service type, location, phone, hours, etc
+open211.socialservices.json:
+  Agency, social service type, services provided, egelibility, fees, etc
+open211.socialservices.homeless.json:
+  Number of beds, check-in/out time, restrictions, etc
+open211.socialservices.freemeals.json:
+  Meal times, food options, faith based, food pantry, dietary restrictions supported, etc
+
+
+
+open211 and the openN11 projects:
+This service agency 211 Open Data schema project tries to define a set of schemas that different types of service providers can publish radically different types of information.  Social services homeless shelter information.  Parks public recreation information.  Schools education information.
+
+The project name "open211" is a single element of a larger openN11 project.  It implies open911 for public safety data, open311 for public works service/requests data and other openN111 projects.
+
+
+Schema overview:
+
+The open211 project has two parts:
+A overall json schema
+Different profiles to customize the schema to an organization
+
+The overall json schema defines different organization types (senior objects) and complex building blocks (sub-objects).  Sub-objects are made up of id/type elements and other sub-objects.  Senior objects are made up of sub-objects and id/text elements.
+
+Some id/text elements are replicated arrays generic objects.  Each generic object has a name, value and description.
+Rather than having objects named:
+   X1, Y2, Z3
+You have 3 text objects:
+  obj1name: X1, obj1value: abc, obj1desc: something about X,
+  obj2name: Y2, obj1value: def, obj2desc: something about Y,
+  obj3name: Z3, obj1value: ghi, obj3desc: something about Z
+
+The profile defines a specific list of generic objects giving each a name, type and description.  The profiles which defined objects are required and optional.
+
+The profile allows the customization of the schema beyond the standard minimum default data types/names.  This allows homeless data to have very different information than school or fire station data and very different information from non-profit data.
+
+Profiles encourage standardization of types of data published and the naming of the data fields.  This allows for simpler coding of applications.  It also allows applications from one brigade to be used in a different area using that brigade's local Open Data portal.
+
+
+Schema is modular.
+Three main categories (senior object types):
+  Location
+  Service
+  Agency
+
+Support objects(sub-objects):
+  Phone
+  Internet resources
+  Social media resources
+  Address
+  Datetime
+  Hours
+
+Sub-objects and id/type elements are used to build senior objects.
+
+Example Park:
+  Location
+    Name: City Park
+    Location type: park
+    Address: 123 Main St, Any Town, USA
+    Longitude, Latitude:
+    Parking:
+    Public transit:
+    Disabled accommodations:
+    Phone: 555-555-1212
+    Hours: 6AM-9PM
+  Service
+    Name: City Park
+    Service type: public park
+    Facilities: bathrooms, play equipment, pick-nick tables, rec center, pool
+    Staff: Staff positions, senior staff member
+    Address: 123 Main St, Any Town, USA
+    Phone: 555-555-1212
+    Internet resources: http://anytown.org/parks/cityparks
+    Social media resources: Facebook, instagram
+    Hours: 6AM-9PM
+  Agency
+    Name: Parks Department
+    Parent agency:
+    Child agencies:
+    Staff: Staff positions, senior staff member
+    Address: 123 Main St, Any Town, USA
+    Phone: 555-555-1212
+    Internet resources: http://anytown.org/parks/cityparks
+    Social media resources: Facebook, twitter, instagram
+
+Different types of senior objects have different requirements for what types of fields need to be stored.  Trying to create a single schema that encompasses all of the fields needed creates a schema with thousands of fields.
+
+A different approach is to define a generic field type like text, phone, address.  The generic type would include a name parameter, value parameter and optionally a parameter description.  Then in the Schema for a parameter type have a count of instances and then multiple specific instantiated definitions.
+
+
+Schema/data translation tool:
+Problem:
+open211 data is collected from many different sources.  Those sources are likely to use different data field (column) names from the open211 schema.  Data fields may be in different formats: a single street/city/ST/zip entry -vs- separate street, city, ST and zip entrees.  Some data fields like longitude and latitude may need to be derived.
+
+Solution:
+A ruby based data conversion tool that used a per data source schema that defines the data source name and corresponding open211 data field name.  Inside the tool data conversion modules can be called to clean up the data field(s) or use several data fields to derive additional information such as longitude/latitude.
+
+The tool acts as a filter:
+  Input: json file or json API call
+  Configure filter operation with json schema
+  Load data conversion modules
+  Process data / rename data fields
+  Output: json data stream
+
+This solution also allows for separation of different data source agencies.  Social services has their dataset.  Parks has theirs.  Parks can not make changes to social services.  Primitive access control for maintaining data.
+
+UID key concept: TBD
+
+
+For example, phone number for a something:
+PhoneNumberCount (number): 3
+Phone1Name (text): Main number
+Phone1Number (text): 555-1212
+Phone1Description (text): Main phone number for all requests
+Phone2Name (text): Español
+Phone2Number (text): 555-1213
+Phone2Description (text): Personal que habla español
+Phone3Name (text): Informational Message
+Phone3Number (text): 555-1214
+Phone3Description (text): Daily pre-recorded message
+
+This structure would allow an app to display:
+  Main number: 555-1212
+  Español: 555-1213
+  Informational Message: 555-1214
+The flyover for the Español entry would be: "Personal que habla español"
+
+This approach solves the Street address line1, line2, line3, lineN+1 problem.  Want to publish an employee phone directory for a 100 person organization?  Just use 100 phone entries plus any organizational phone numbers.
+
+Technical detail: I don't think we need the count.  The parser organizes the phone entries based on context.  In the organization context all phone numbers are part of the directory.  If the organization has a location that also has one or more phone numbers, those numbers can be added to the directory as location specific phone numbers.
+
+Profiles:
+Different types of objects have different parameters associated with them:
+A park would have location and hours.  Also bathroom, facilities, dog friendly, activities
+A homeless shelter would have location and hours  Also number of beds, showers, washer/dryer, checkin time, checkout time.
+A food assistance program would have: assistance provided, eligibility, contact information including locations.
+
+There would be a default profile with baseline parameter names for application portability.  All the apps would know each entry has an agency, entry type, entry name, location, phone number, longitude, latitude.  This would allow a parks application to be able to show baseline information about homeless shelter by changing a service type query from "parks" to "homeless shelter".  This might be nothing more than plotting it on a map with a name, address and phone number.
+
+A specific profile would then assign names and uses for the extensible sub-objects.  I.e, phone1 is main, phone2 is español, phone3 is after-hours, text1 is program name, text2 is services, text3 is eligibility, ...
+
+The profile allows each different service provider, agency, or location to define what data they want to store in the record and what the names of that data.
+
+The profile also allows an application to quickly parse what data is available and parse its format.  The profile that this entry X, Y, Z data types so it can display that information.  I.e. the object is a physical location so it has an address, longitude/latitude and may have parking, disabled access, transit information, public restroom, hours, ...
+
+Profiles are important because they define standard data instances and names for an object: agency, service or location.  This acts as a guide for information needed from agency data sources.  It also standardizes the names of the data types for simpler application coding.
+
+Profiles allow different classes of organizations to define an organization type profile (schema) specific to the organization type's requirements.  Profiles allow very different types of data: service agencies, homeless shelters, hospitals/clinics, parks, libraries, fire stations, drop in centers, assisted living facilities, ...  A specific class of organization could put together a Code for America project to define a profile specific to their needs.  This avoids the "one size fits all" problem of specification design.
+
+Profiles are not a straight jacket.  If an agency wants to publish different data or the data with different names they can.  If they publish a profile then the application can load the profile and use data field names it is coded for.  The agency could code their own applications and use their data field names.
+
+Local agencies are encouraged to publish their own profiles which are extensions to the profile when they have additional, different or other types of data.  This allows an agency specific application to make use of that additional data.  Other applications will still work.  They will be able to make use of the standard data but not the additional data.
+
+For example: if your homeless data set has a data field "barber", your local profile would add that as a data field named "barber" of type boolean.  Your local application could display that information as an icon.  But a different homeless application using your dataset would still work.  It would show the standard information: location, beds, hours, etc.  But it would not display your barber information except on an additional information screen as key:value text.
+
+Non-standard profiles will mostly be used for transition from legacy datasets/applications to standards based apps.
+
+
+
+Most of the initial work will be changing the API code calling the data base SaaS API to use the Socrata API.  this would allow the gradual transition of apps to the Socrata API starting with the console.  Eventual the api server could shrink to just the "glue" data services that Socrata does not provide.  Authentication, logging, dashboard, ???
+
+
+My focus has been on adding "interesting" data to the Open Data portal.  One area of interesting data is what I call base level datasets.  They types of database tables that are typically used in join statements.  Facility location, phone, hours, services/activities, parking, mass transit.  The basic data you would want display in a mobile app along with service specific data when you clicked on a location or service agency.  Currlently the County's Open Data portal has much of this data for schools, libraries, free WiFi locations, etc, split across multiple datasets.  While researching this problem I came across the CfDC open211 project which lead me to thinking what if open211 could host data for differnt types of services other than social services?
+
+Imagine my suprise when open211 lead me to ohana and smc-connect.  Here we have an exitsting standard and code base poplulated with excellent data for San Mateo County.  Things have come full circul for me.
+
+

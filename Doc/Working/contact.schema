@@ -1,0 +1,203 @@
+open211 Contact Object Schema
+
+The contact object is designed to scale to all different types of contacts: person, phone, organization, email, url, social media.  Its predefined properties are organizational metadata and a generic name:type N+1 syntax.  Profile schema are used to define standard and optional names.  A person: name, title, phone, email.  A phone: a name, type or title and a phone number.  Social media contact: a name, type or title followed by social media handles, facebook, twitter, etc.
+
+Most contacts will be a hybrid.  A person or a role along with phone, email, url and Social media handles.  Indexing will allow open211 to reference this contact by name, phone, email or social media.  In a department directory name is used as the index.  In a organizational contact phone along with type, title or service are used as indexs.
+
+By combining all the information into a single object, applications can get back a rich set of data.  Referencing a phone number in a directory?  If that phone belongs to a specific person you could get back name, title, email, url, twitter depending on what that person makes public.
+
+Sounds complex.  It can be.  But most of the time it is not.  The contact object is designed to grow and shrink with the dataset.  The schema defines a set of documented propterties.  The data provider can use a profile schema to limit the schema to the data fields they actually have.  As more data becomes available, the profile schema can be expanded.
+
+A coder may say:
+"Yes there are lots of fields.  But the dataset I have been given only has these 20 fields and maybe another 10 fields sometime.  I will write a profile schema with the 20+10 properties."
+
+The cloud based distributed Open Data server providing the data store PaaS can use the profile to allocate database storage.
+
+Contact object:
+The "contact" object is one of the building blocks (base objects) in the open211 schema.  It combines many other properties into a single place centered around an identity.  That identity would normally be a person.  But it could also be a phone number: voice, fax, afterhours.  It could also be an organizational identity: organization, company, department, information, sales, appointments, crisis, 24hour.  It could also be souly an Internet based service: promo campaigns, online help, online forms, information resorces, howtos.
+
+
+"contact": [
+{
+  # Identity and heirarchy
+  "org_uid": orgShort:orgID, A unique ID within the parent's organization.
+  "org_fquid": Fully qualified ID: ParentID(s):orgID,
+	This is the unique ID for this instance of a contac
+	The parent__uid and parent_ID are part of the org_fquid
+
+  # contacttype gives hints about the type and format of the item.
+  # one way to use contacttype is to specify profile schema(s)
+  "contacttype": < tags: organization, person, phone, inetaddr, other_N+1 >
+
+  # name is a lable we call something by, person, service, job, title, ???
+  "name_N+1": {
+    type: <tag: Full, first, last, middle, prefix, postfix, pref_formal, pref_informal, genderpronon, organizational, function, resource >,
+    type: "string",
+
+  # inetaddr: an Internet address: URL, URI, email, handle, phone, otherN+1
+  "inetaddrN+1": {
+    "type: < tags: phone, URL, email, social_media, DunBradst >
+    "value": "strings",
+  }
+
+  # Location:
+  "location+1": {
+    json-ld uri,
+  {
+
+},
+
+"value": "XX-XXX-XXX-XXXX",
+  < tags: voice, cell, landline, voicemail, main, afterhours, extension vanity other >
+"value": URL/URI
+  < tags: homepg, sales, support, help, appointments, directory, contact_us, about, other_N+1 >
+"value": Social media handle
+  < tags: email, tiwitter, facebook, linkedin, google+, yahoo, slack, meetup, other_N+1 >
+"value": "shipperid"
+  < tags: usps, ups, fexex, amazon, other_N+1 >
+"value": "Old school ID"
+  < tags: telex, westernunion, dunbrad, buslicence, resturauntid, other_N+1 >
+
+A standard profile
+
+"contact": [
+{
+  orgid: 1318
+  orgshort: harksys
+  orguid: harker:1318
+  orgfquid: us:ca:co:smc:bus:harksys:1318,
+
+  orgname_N+1: {
+    orglong: Harker systems
+    orgalt: Me, Myself and I
+    orgtype: Future Internet Infrastructure Engineering
+  }
+
+  name_N+1: {
+    first: Robert,
+    last: Harker,
+    full: Robert Harker,
+    title: Open Data Evengelist,
+    company: Harker Systems
+  }
+
+  inetaddr_N+1": {
+    phone: 650-555-1212,
+    cell: 530-555-1212,
+    email: harker@example.com,
+    homepage: https://harker.com/people/harker,
+    opendata: https://harker.com/OpenData,
+    linkedin: rlh100,
+    yahoo: rlh100@mail.yahoo.com,
+    twitter: @rlh100,
+    uucp: "{fsdcupt,nsc,pyramid}!harker"
+  }
+
+  Location_N+1: {
+    home: json-locid_uri
+    work: json-locid_uri
+  }
+}
+
+
+###############################
+Contact name is indexed by:
+  name.full , inetaddr.phone, inetaddr.email, inetaddr.url and  inetaddr.location, orguid, orgfquid
+
+"contact_name": [
+{
+  metadata: orgid, orgshort, orguid, orgfquid, orgname_N+1
+
+  orgname_N+1: Inheartited
+  name_N+1: {
+    full: Robert Harker
+    title: Open Data Evangelist
+  }
+  inetaddr_N+1": {
+    phone: 650-555-1212
+    email: harker@example.com
+    homepage: http://harker.com
+  }
+  Location_N+1: {
+    mailstop: 318
+    business: @open411://us:ca:co:smc:ci:sanmateo:ndelaware:523
+or  business: @open411://us:ca:co:smc:apn:032-167-140
+  }
+
+"contact_phone": [
+{
+  metadata: orgid, orgshort, orguid, orgfquid, orgname_N+1
+
+  name_N+1: {
+    type: { 24hour:, crisis:, sharedphone: }
+  }
+  inetaddr_N+1": {
+    phone: 650-555-1212
+    onlinehelp: http://harker.com/help
+  }
+}
+
+"contact_url": [
+{
+  metadata: orgid, orgshort, orguid, orgfquid, orgname_N+1
+
+  name_N+1: {
+    type: { homepage }
+  }
+  inetaddr_N+1": {
+    homepage: http://harker.com
+    phone: 650-555-1212
+  }
+}
+
+"contact": [
+{
+  metadata: orgid, orgshort, orguid, orgfquid, orgname_N+1
+  orgid:, orgshort:, orguid:, orgfquid: 
+  orgname_N+1: {
+  name_N+1: {
+  inetaddr_N+1": {
+  Location_N+1: {
+
+#############################
+
+Location is related to many types of data:
+  building, organization, services
+  closest: school, fire station, library, park, storm drain
+  polical districs: city council, supervisor, congresional
+  service districts: water, light parking
+  civic information: zoning, street sweeping, garbage collection schedules
+
+  "orgShort": Short name of orgainization, 8 characters or less recommened
+
+###############################
+A format flag to the API call can define the phone number format desired.  Actually this is just another i18n problem.
+
+    i18n_N+1: {				# important for i18n names and cultures
+      "language": "i18n string",
+      "i18n_text": "string",
+    }
+
+  # authentication
+  "pubkey_N+1": {
+     type: < tag: rsa, ecsd, rot13, other_N+1 >
+  }
+
+
+###########
+"contact": [
+{
+  metadata: orgid, orgshort, orguid, orgfquid, orgname_N+1
+
+  name_N+1: {
+  inetaddr_N+1": {
+  Location_N+1: {
+
+
+"department": null,
+"extension": null,
+"number_type": "fax",
+
+licenses
+
+

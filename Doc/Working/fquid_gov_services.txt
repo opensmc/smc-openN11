@@ -1,0 +1,82 @@
+The branch "US : CA : County : San Mateo:" is a region branch.
+The region branch should include anything and everything about services in
+  the County of San Mateo.
+
+  Structure:
+    us:ca:co:smcgov:		Data for the region San Mateo County
+
+The branch "San Mateo: Government:" is the County of San Mateo government's
+  branch.
+It includes all of the "Business" of the County of San Mateo government
+  and staff.
+It may also include government provided specialized services such as arborist
+  or historian.
+
+  Structure:
+  us:ca:co:smcgov:gov:		Data about the County government
+in San Mateo County
+    aboutus:			Information about the foo including web,
+social media and contact information.
+    org:			Org chart
+    dir:			Staff directory
+
+Each department has a branch.  The branch "San Mateo: Government: Parks:"
+  is the Parks department's information.
+
+  Structure:
+  us:ca:co:smcgov:gov:parks:	Data about the San Mateo Parks Department itself
+    aboutus:			Information about the department
+    org:			Org chart
+    dir:			Staff directory
+
+
+The branch "San Mateo: Parks:" is about the service a Parks provides.
+I.e. A place to go to enjoy yourself.  The location has services.
+In this case playgrounds, playing fields, trails, bathrooms and type of access.
+
+  Structure:
+  us:ca:co:smcgov:parks:
+    edgewood:		Edgewood Park
+    wood side:		The Woodside Store
+  
+
+The branch "San Mateo: City of San Mateo:" is a region branch.
+The region branch should include anything and everything about services in the
+  City of San Mateo.
+It should include information about services that are particular to the city
+  but not available county wide.
+
+  Structure:
+  us:ca:co:smcgov:ci:csm:
+  us:ca:co:smcgov:ci:csm:nonprofits	Non-profits in the City of San Mateo
+
+
+The branch "San Mateo: City of San Mateo: Government:" is the City of
+  San Mateo's government branch.
+
+  Structure:
+  us:ca:co:smcgov:ci:csm:gov:
+    aboutus:			Information about the City of San Mateo
+    org:			Org chart
+    dir:			Staff directory
+
+The branch "San Mateo: Government: City of San Mateo: Government: Parks:" is
+  the City's Parks department's information.
+
+  Structure:
+  us:ca:co:smcgov:ci:csm:gov:parks:	Data about the City's Parks Department
+					  itself
+    aboutus:			Information about the City of San Mateo's Parks
+				  Department
+    org:			Org chart
+    dir:			Staff directory
+    arborist:			City Arborist
+
+The branch "San Mateo: City of San Mateo: Government: Parks:" is about the
+  service the city's Parks provides.
+
+  Structure:
+  us:ca:co:smcgov:ci:csm:parks
+    central:			Central Park
+    king:			Martin Luther King Park
+

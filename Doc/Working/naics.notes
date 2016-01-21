@@ -1,0 +1,32 @@
+How to Read a NAICS Code
+http://siccode.com/en/pages/what-is-a-naics-code
+
+primary NAICS code
+secondary NAICS codes
+
+The first two digits designate the largest business sector,
+the third digit designates the subsector,
+the fourth digit designates the industry group,
+and the fifth digit designates particular industries.
+The last digit designates national industries.
+
+Example:
+Sector
+11
+Agriculture, Forestry, Fishing, Hunting
+
+Subsector
+111
+Crop Production
+
+Industry Group
+1113
+Fruit and Tree Nut Farming
+
+Industry
+11133
+Non-citrus Fruit and Tree Nut Farming
+
+U.S. Industry
+111331
+Apple Orchards

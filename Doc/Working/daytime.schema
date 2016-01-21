@@ -1,0 +1,11 @@
+211daytime: {
+  Name (text):
+  LableN+1(text): {
+   datetime(Su,Mo,Tu,We,Th,Fr,SaT00:00PM)|(datetime)|(text)
+  }
+}
+
+Name:Hours,
+Label1:open, Datetime:Mo-FrT0900AM-0600PM
+Label1:AfterHrs, Datetime:Mo-FrT0600PM-0900AM
+Label1:AfterHrs, Datetime:Fr-MoT0600PM-0900AM

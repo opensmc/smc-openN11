@@ -1,0 +1,80 @@
+open211 org_fquid: The Fully Qualified Unique ID 
+(pronounced: f quid)
+
+This is a proposal to define a Fully Qualified Unique ID for data sets and for each individual piece of data stored in the open211 dataset.  It will start with "open211://" and be heiarcial.  The name is a path separated by colons (:) with the two letter country code at the top ending with a specific item's organication specific unique UD (org_uid).  An example is:
+  open211://us:ca:co:sanmateo:parks:SMCparks/SMC-Park-01
+
+
+Problem: How do you find data on an Open Data portal?
+
+A fundemental problem with Open Data portals today is how to find the data.  More strictly, how to find the data in a machine readable way.  Everyone gives their datasets different names and use slightly different column names.
+
+In order for there to be portability across civic apps there needs to be a way for the apps themselves to discover data they can display on a forgin Open Data portal.
+
+The simplest way to do this:
+  1. Adopt simple well definded types (names) for common datasets: parks, health, social_services, fire.
+  2. Define a simple organization indexing standard so apps can parse a path to the data.
+  3.  Define data properties (column names) for common data types: address, phone, url, org, contact, location.
+
+
+Proposal:
+Create a Fully Qualifed UniqueID (FQUID) based on the design principles of Domain Naming System, DNS.
+
+Item 3 is a separate topic.
+
+Implimentation:
+The name will be a series of tokens separated by colons (:) read left to right.  The tokens are short (10 char or less) text limited to: [a-z][A-Z][0-9][-_].
+
+At any level the parent of a domain determines the name space under it.
+
+This project is evolving the old RFC ??? co.sanmateo.ca.gov naming standard.  I am using URL syntax so the protocol is "open211://".
+
+The base OrgFQUID for the San Mateo County Open Data portal is:
+  open211://us:ca:co:smc
+
+Below this will be generic departments:
+  parks, library, health, social_services, fire, schools,
+This is a county region so parks data includes city parks.
+
+For San Mateo County parks:
+  open211://us:ca:co:smc:parks
+
+For City of San Mateo parks:
+  open211://us:ca:co:smc:ci:csm:parks
+
+smc is a convention for San Mateo County and csm is for City of San Mateo.  The co:smc and ci:csm parts are treated as type:name json data pairs.
+
+You can match both with:
+  open211://us:ca:co:smc*parks		Star(*) matching both ":" an ":ci:csm"
+ (open211://us:ca:co:smc:*:parks?)
+
+Use existing (short) naming conventions:
+Using existing (short) naming conventions is encouraged.  The SMC, CSM and CCSM (Comunity College SM) are existing conventions used by civic agencies.  Short naming conventions only have to be unique in the region or organization.  The fully qualified path makes it Unique.
+
+Note: this proposal does not require short names.  It is OK to use full city, county, or region names.
+
+
+Benifit:
+The benifit of this solution is that it is simple and does not require any advanced technology other than the Socrata platform itself.
+
+Accepted Limitation:
+It is fully understood that there are many problems with this idea.  DNS has found them over and over again.  DNS has solved them over and over again.  Newer technology does it better.  But lets wait until we have a significat base (>100) of Open Data portals using the standard before we worry about them.  The second generation can look at new technology.  open211.v1's goal is that it be simple, useful and easy to impliment.
+
+
+####
+Define a flexable system for different service types can define their own data.
+
+One of the generic organization is County government.  This department will then contain lists of boards, deparments, services.
+
+Organizations can decide if they want to use generic names or their own sub-organization names.
+
+
+
+While this looks like a backwards DNS domain name, it is not.
+
+Actual resolution of this string into an Open Data portal will be through a Socrata based shared, replicated data portal directory.  The portal directory is just of the directory types available using the open211 directory services.
+
+
+Public Open Data is the wild west.  Vast tracks of land with a very few towns (government bodies) trying to survive.  Each town is separate doing things their own way.
+
+

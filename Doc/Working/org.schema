@@ -1,0 +1,56 @@
+
+###########
+"contact": [
+{
+orgid:, orgshort:, orguid:, orgfquid: 
+orgname_N+1: {
+name_N+1: {
+inetaddr_N+1": {
+Location_N+1: {
+
+###########
+[
+{
+"id": 17, 
+"slug": "salvation-army", 
+"description": "Provides emergency food, to other agencies.", 
+"short_desc": "Short discription"
+"name": "South San Francisco Citadel Corps", 
+"organization": {
+"accreditations": [], 
+"alternate_name": null, 
+"email": null, 
+"admin_emails": [], 
+
+"locations_url": "https://ohana-api-demo.herokuapp.com/api/organizations/salvation-army/locations", 
+"name": "Salvation Army", 
+"url": "https://ohana-api-demo/api/locations/orginazation", API?
+"url": "https://ohana-api-demo.herokuapp.com/api/organizations/salvation-army", 
+"website": null
+
+"active": true, 
+"date_incorporated": null, 
+"funding_sources": [], 
+
+"coordinates": [
+"latitude": 37.6445898, 
+"longitude": -122.4224905, 
+
+###############
+
+the route has person, not the other way around
+
+A person may have a number of routes.
+  In this case the person groups the routes,
+    but the routes still have a person.
+
+Org geography
+
+org:
+  teritory:
+    region:
+      tract:
+      beat:
+      route:
+
+

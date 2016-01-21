@@ -1,0 +1,41 @@
+openN11: A family of Open Data directory API based services
+
+(open111: undefined)
+
+open211: Community services and information
+  open211 is a directory service
+  Information about public services of all types: human services, fire stations
+    libraries, parks, gov staff directories and org charts
+
+open311: Municipal government services
+  open311 is a transaction service
+  Traditionally Public Works
+  Other types of service requests: Library card services,
+    Parks reservations/sign ups, human services appointments
+  open311 is a read/write service so simple data exports will not work
+    other than for lookups of public requests
+  Parts of open311 will require strong authentication of the user
+    and strong access controls which Socrata does not support
+
+open411: Directory assistance
+  open411 is a directory service
+  Information about things: public names of places and people, phone numbers,
+    URLs, addresses, parcel numbers, bus stops, social media names/handles
+
+(open511: Traffic)
+
+open611: Communications
+  Originally for telephone repairs
+  Re-purposed to be a "big data" type data repository
+  open611 is a data service, API based
+  Historic and current datsets about:
+    budgets, county checkbook, gov salaries, infrastructure repair,
+    school performance history, historical water quality reports,
+    historical traffic accident data, historical homeless data,
+    pdf files, pdf scraped data
+
+(open711: Translation)
+(open811: Underground public utility location)
+(open911: Emergency services)
+
+

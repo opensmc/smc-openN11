@@ -1,0 +1,66 @@
+
+us address are defined as a bottom up structure:
+department:
+floor:
+building:
+street address:
+city:, state:, zip:
+
+
+CASS: Coding Accuracy Support System
+https://tools.usps.com/go/ZipLookupAction!input.action
+
+In a locaton the Uniqie ID, UID, can be a combination of postal address, survayors reference and long,lat coodinates.  In california the APN/postal address pair is unique address.
+
+Primary UID keys:
+  Postal address
+  APN (survayors reference)
+
+location {
+  schema_N+1: type.schema
+
+  address {
+    schema_N+1: type.schema
+# postal
+    address_N+1: string
+    city
+    state
+    zip
+    country
+# coordinates
+    long
+    lat
+    xy
+# parcel
+    apn
+  }
+
+is a reflist structured text used to render a web page or a list of organized data items?
+
+reflist: [
+  "org_fquid": Fully qualified UID: FQUID: parent_fquid:orgUID, (required)
+  "schemaN+1": (required)
+  "org_uid": The Unique ID, UID, within the parent organization.
+
+  string:
+  url:
+  paragraph:
+
+
+"contact": [
+{
+  # Identity and heirarchy
+
+    < tags: organization, person, phone, inetaddr, other_N+1 >
+  
+  # name is a lable we call something by, person, service, job, title, ???
+  "name_N+1": {
+    schemaN+1: <tag: Full, first, last, middle, prefix, postfix, pref_formal,
+      pref_informal, genderpronon, organizational, function, resource >,
+  }
+
+  # inetaddr: an Internet address: URL, URI, email, handle, phone, otherN+1
+  "inetaddrN+1": {
+    "schemaN+1: < tags: phone, URL, email, social_media, DunBradst >
+  }
+

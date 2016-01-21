@@ -1,0 +1,55 @@
+The open211 json data for the San Mateo County LAFCo organization
+
+Service specific data for San Mateo County LAFCo organization.
+Service in this case is the monitoring and maintaining of the cities and districts in San Mateo County.
+
+This json dataset is for LAFCo to publish its data.
+It is the data that an app gets returned if they query:
+  us:ca:co:smcgov:lafco:*
+
+It has a much richer set of LAFCo data.
+  Information about LAFCo itself.
+  Information about all the cities, boards and commissions.
+
+The data set starts with the data from smcgov:
+
+us:ca:co:smcgov:lafco {
+  org_fquid:,
+  org_name_acronym:,
+  org_name_short:,
+  org_name_long:,
+  org_contact {
+    data from smcgov:
+
+    org_directions: Traveling from the South...... 
+    org_map: http://lafco.smcgov.org/sites/lafco.smcgov.org/files/styles/opensanmateo_resp_images_large/public/County%20Center%20Map.JPG?itok=pxSAorVK
+
+    aboutus: http://lafco.smcgov.org/commission
+    faq: http://lafco.smcgov.org/faqs
+    org_budget: http://lafco.smcgov.org/documents/adopted-final-2015-16-lafco-budget
+    maps: http://lafco.smcgov.org/maps
+    org_directory: http://lafco.smcgov.org/local-government-directory
+    org_reports: http://lafco.smcgov.org/reports
+    meeting_materials: http://lafco.smcgov.org/meeting-agendas-minutes-materials
+    org_gov_board: http://lafco.smcgov.org/commission {
+      See org_gov_board data structure below
+    }
+    
+  }
+  board-clerk: {
+    name: Jean Brook,
+    title: Commission Clerk,
+    Phone: 650-363-1863,
+    fax: 650-363-4849,
+    email: jbrook@smcgov.org
+    homepage: http://www.smcgov.org/personnel/???
+  }
+  
+  auth_source: http://lafco.smcgov.org
+  auth_org: us:ca:co:smcgov:lafco
+  auth_owner: resp_person: Martha Poyatos
+  auth_ok: authticated
+  updated: datetime
+
+
+}

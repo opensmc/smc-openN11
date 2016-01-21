@@ -1,0 +1,121 @@
+April,
+Can I make two observations based on our short conversation and your OR (HSDS) Spec?
+First: I suspect that you were overwhelmed by the complexity of the ohana/codeDC open211 schema
+Second: You have been adding complexity to your Spec.  4 address fields, revision fields, fields for different types of uses.
+
+It is really hard to keep a spec down to bare minimum because of all of the what/if cases for additional types of data.  I have written standards before.  It is hard.
+
+To be honest, I think that the Ohana schema is the better, more comprehensive schema.  Actually I think it need to grow by at least 50%.  But you are correct, it is overwhelming.  100-200 different types of data, oh my gosh!  Talking to agency and asking for data?  "You want my agency to generate *all* of that data? (No thanks)."
+
+I am making a guess that you wanted your data schema to be leaner and easier to understand and use.  That is an important goal.
+
+A data schema defines what data can be stored.  If the schema does not define the data type, it is hard to store it in the dataset.  This means that schemas need to be comprehensive.  But complex, comprehensive schemas are prone to problems.  One solution to the complexity problem is to define minimal sub-sets or profiles that provide the data needed for a specific use.  This profile is based on the larger schema so if a particular application or agency needs addition data, the parent schema allows it in a well defined (API) way.
+
+The discussion with an agency (data provider) becomes:
+"Here is a minimal subset of data that we require and other data types we support."
+"But we need to publish additional XYZ data not on your list."
+"You can publish that using the full open211 schema."
+"Your app(s) will be able to use this additional data."
+"Other apps will still work with your standard data but they may not be able to use your additional data."
+
+This approach requires a minimal investment from the agency to generate the data but allows them to publish any additional data they want.
+
+The important concepts here are:
+A comprehensive json schema to cover the basics, the desirable data and edge cases.
+Small individual profiles of the schema for specific use cases to manage complexity.
+
+Do you agree with my discussion?  I am interested in hearing your thoughts.
+
+RLH
+
+Some comments on style of OR (HSDS) Spec V1.0 (SF Specific Use Case)
+I like your format.  Keep in mind I like what you have done.
+Each line needs a prefix field which is a proper json single word varible name.
+I like the Example field.  It could give a default value that can be used in an app.
+
+You have ordered the table alpha-numerically.  While this makes finding something easy, it makes it hard to understand the spec.  How am I supposed to figure out what fields are related to a building's location?
+I recommend that you re-order the list.  Topic categories I see are:
+Service agency / services related
+Location related
+Eligibility / service plans related
+Hours / appointment related
+Data records management related
+
+How do you organize in your mind the different types of data?
+
+Several of your data types I think are actually selection items or tags for a data field:
+Client types: Men, Women, Children, Pregnant Women, Families
+Health care programs: Medi-Cal, Medi-Care, Healthy SF
+
+Comments please
+RLH
+
+I must admit I am not a google docs user.  Google knows far too much about me already so I try not to actually log into my google account.
+
+
+aprilsteed@gmail.com
+OR Spec V1.0 SF fork
+
+April,
+Thank for the google docs link.  I see you have updated it to make it more like a formal spec.  Can you export it as HTML or better yet markdown?  I am a text/vi kind of guy.
+
+I am not going to be at the Code for San Francisco meetup tomorrow.  I am giving a Jenkins Continuous Integration talk at the Silicon Valley Linux Technology meetup instead.
+
+I have a couple of postings I have written about the sf-openreferral spec.  Should I email them to you or would it be better to post them to the slack channel?  If so, I need a slack invitation to join.
+
+Thanks,
+RLH
+
+
+
+Subject:
+Object
+Possessive
+Possessive Pronoun
+Reflexive
+
+he, him, his, his, himself
+She, her, her, hers, herself
+zie, zim, zir, zirs, zirself
+
+
+GenderPronoun: (type list of gender tags)
+GenderTag: (type structured list)
+  Tag fields: (TagName, TypeSubject, TypeObject, TypePossessive, TypePossessivePronoun, TypeReflexive)
+
+Example
+OID:	Data:
+1.2.3  	...GndrPn	GenderPronoun: ( Man | Woman | Ze | UserDefN+1 )
+1.2.3.1	...GndrPn.Man	(Man, he, him, his, his, himself)
+1.2.3.2	...GndrPn.Woman	(Woman, she, her, her, hers, herself
+1.2.3.3	...GndrPn.Zien	(Zien, zie, zim, zir, zirs, zirself)
+
+1.2.3.1 ...GndrPn.Man.Español	(él , él, su , su , propio
+1.2.3.1 ...GndrPn.Woman.Español	(Ella , ella, ella, ella , ella misma
+
+
+open211type {
+  jsontype: {
+    type:
+    id:
+    title:
+    description:
+  }
+  Abbreviation (text):
+  Example (text):
+  # meta data:
+  Restrictions (list of tags):
+    { Public, Private, Internal, AuthReqOnly, UserDefN+1 }
+  OwnerAgency (text):
+  OwnerUserRole (text):
+  CRUD Datetime (action, datetime)
+  SignedChkSum ( type:hash )
+  TransType (list of tags):
+    { None, Language, Money, Measurement, UserDefN+1 }
+  Importance (list of tags):
+    { Must, Should, May, ShouldNot MustNot, UserDefN+1 }
+
+}
+
+
+

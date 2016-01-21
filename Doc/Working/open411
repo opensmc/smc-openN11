@@ -1,0 +1,36 @@
+open411 directory assistance:
+Many types of entities: phone numbers, contacts, street addresses, APN
+
+Open411 follows the Internet convention of a branching tree:
+  open411://us.ca.co.smcgov/{address,phone,name}/?search=
+
+I visualize this tree as a branching on a horizontal plain.  As you traverse the tree, each branch, each leaf become data nodes in the tree.  Hanging down from this node is a rich set of additional data.
+
+For an address it might include:
+  street, city, state, zip, parcel number, geo-center
+  elementary, middle, high school/district/URL
+  fire, police, public works name/local station/URL
+  parks, libraries, ??? name/closest/URL
+  US/state congressional districts, County/city board districts.
+  Health clinic/Hospital/Emergency room name/closest/URL
+
+Some of this data is currently only stored in the GIS database: address, APN.
+Most of the data would need to be generated.  ArcGIS is the best way to generate this location related data.  Local: school, fire/police station, library, district, hospital.
+
+The address dataset has a lot of data points (rows).  For San Mateo County somewhere between 120,000 and 150,000 separate parcels.
+
+If I can craft a query that returns all of the needed data that is available from a specific map, then the number of quires can be reduced to one per map.  Otherwise, each item will be a single query.  And 120K * 40 data properties is a heck of a lot of queries.  Many months to complete assuming free access.
+
+Is this a lot of queries for ESRI?  Queries can be throttled.  1 per second? 10 per minute.  It is OK if the queries for the 120K parcels takes a few days.  Especially if we only have to make one query per map.  If 3 day per map and 10 maps
+, thats 30 days.
+
+
+
+This data is typically very static.  Changes tend to happen in batches.  A district change, opening/closing a facility.  The data is highly cachable.
+
+THUMBNAIL is useless
+THUMBNAIL: http://maps.smcgov.org/rastermaps/apnraster/BK032/thumbs/tn_03216.jpg
+Size: 1051 bytes (1K)
+Dim: 76px*51px
+
+

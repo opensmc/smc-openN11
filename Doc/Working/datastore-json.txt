@@ -1,0 +1,47 @@
+Architecure of the open211 json data store
+
+Linux friendly:
+Source of truth is ascii text files
+Git verson control tracks data changes
+
+Dir Structure:
+Based on the Object ID:
+  us.ca.co.smc.parks_dept.parks
+Each Object ID:
+  Can have its own schemas
+  Schemas are cumlitve, the child inherts defined data from its parent.
+
+Individual data insances are stored in separate files based on their OrgUID:
+  SMC-Parks-1.json,SMC-Parks-2.json,SMC-Parks-3.json,...
+
+Object ID translated into a directory:
+  . . .
+  us/ca/co/smc/
+  us/ca/co/smc/SchemaGovOrg.json
+  us/ca/co/smc/SchemaGovCounty.json
+  us/ca/co/smc/defaults.json
+  us/ca/co/smc/parks_dept/
+
+  us/ca/co/smc/parks_dept/SchemaGovOrg.json
+  us/ca/co/smc/parks_dept/ParksDept.json
+  us/ca/co/smc/parks/defaults.json
+
+  us/ca/co/smc/parks_dept/parks/
+  us/ca/co/smc/parks_dept/parks/SchemaParks.json
+  us/ca/co/smc/parks_dept/parks/defaults.json
+
+SchemaGovOrg.json would define standard data for a government organization:
+  OrgName,OrgLocation,OrgPhone,OrgEmail,OrgURL,
+  OrgDesciption,OrgServices,OrgPrograms,
+  OrgManager,OrgDepartments,OrgDeptMgrs,
+  OrgServiceLocs,OrgServiceLocsSvrcs,OrgServiceLocsContacts,
+
+SchemaGovCounty.json would define standard data for a county government organization:
+  CountyBoard,CountySuper,CntMgr,CountyTaxMgr,CountyRecordMgr,CountyElectionMgr
+
+SchemaParks.json would define standard data for a Parks Department:
+  ParkLocs,Actvities,Registration,Events
+
+SchemaParks.json would define standard data for a Park:
+  Picnic,PlayGroundEquip,PlayFields,Trails,RecCenter,Harbor
+

@@ -1,0 +1,213 @@
+co.ambag.csv:
+  Data from ABABG member organizations page, counties, cities, partners
+  data_source_url: http://www.ambag.org/about-us/regional-coordination
+  data_source_name: Asso. Monterey Bay Area Gov. (AMBAG) Regional Coordination
+  data_source_schema: 
+  lastupdate: 
+  Not CSV yet
+
+co.countynames.csv:
+  County names from CALAFCo site
+  data_source_url: 
+  data_source_name: CALAFCo
+  data_source_schema: org_fquid,org_name_short,org_name_long
+  lastupdate: 
+
+co.csm.lib.csv:
+  Library data for City of San Mateo
+  data_source_url: http://www.cityofsanmateo.org/index.aspx?NID=514
+  data_source_name: Library Locations & Hours
+  data_source_schema: 
+  lastupdate: 
+
+county.officers.csv:
+  County elected officials
+  data_source_url: https://www.shapethefuture.org/elections/electedofficials/county/
+  data_source_name: San Mateo Citizen&rsquo;s Guide to Elected Officials
+  data_source_schema: org_fquid,org_uid,resp_title,org_name_short,term,org_comment,next_election,resp_person,address,city,state,zip,resp_phone,resp_fax,resp_email,resp_url,data_source_url,lastupdate
+  lastupdate: 
+
+planedparent.csv:
+  Planned parenthood clinic information
+  data_source_url:  https://www.plannedparenthood.org/health-center/california/
+  data_source_name: Planned Parenthood San Mateo County Clinics
+  data_source_schema: 
+  lastupdate: 2015-12-15
+
+smcgov-dept.csv:
+  San Mateo County departments
+  data_source_url: http://www.smcgov.org
+  data_source_name: San Mateo County Departments
+  data_source_schema: 
+  lastupdate: 
+
+smcgov.elec.higher.ofcls.csv
+  County and city elections officers
+  data_source_url: 
+  data_source_name: Various elected officials, hand scraped
+  data_source_schema: 
+  lastupdate 
+  Not CSV Yet
+
+smcgov.elect.ofcr.csv:
+  Elections Office filing instructions
+  data_source_url: https://www.shapethefuture.org/campaigns/fillingarguments/
+  data_source_name: Candidates &amp; Campaigns Instructions for Filing Arguments &amp; Rebuttals
+  data_source_schema:City,resp_person,address,city,state,zip,resp_email,data_source_url,last_update
+  lastupdate: 
+
+smcgov.hr.policies.csv:
+  A reflist of online policies published by County HR
+  data_source_url: http://hr.smcgov.org/hr-publications
+  data_source_name: Home - About HR - HR Publications
+  data_source_schema: org_fquid,org_uid,title,url1,url2,text
+  lastupdate 2015-12-28
+
+smcgov.lib.city.locs.csv:
+  Library locations for cities in San Mateo County
+  data_source_url:library: http://www.smcl.org/en/content/city-libraries
+  data_source_name:library: Home &gt; City Libraries
+  data_source_schema:library: org_fquid,org_uid,org_name_short,address,city,state,zip,phone,homepage,imgage,hours,data_source_url,lastupdate,authority
+  lastupdate 2015-12-27
+
+smcgov.lib.csv:
+  Library admin staff dir for San Mateo County
+  data_source_url: http://www.smcl.org/en/content/library-administration
+  data_source_name: Library Administration
+  data_source_schema: org_fquid,org_uid,dept,resp_person,resp_title,address,city,state,zip,phone,email,data_source_url,lastupdate
+  lastupdate:
+
+smcgov.lib.holiday.csv:
+  Library holiday closed days for San Mateo County
+  data_source_url: http://www.smcl.org/en/content/holiday-closures
+  data_source_name: Holiday Closures
+  data_source_schema: 
+  lastupdate: 
+  Not CSV yet
+
+smcgov.lib.locs.csv:
+  Library locations for San Mateo County libs
+  data_source_url: http://www.smcl.orghttp://www.smcl.org/content/hours-and-locations
+  data_source_name: Home &gt; SMCL Branches &gt; Hours & Locations
+  data_source_schema: org_fquid,org_uid,org_name_short,hours_holiday,imgage,address,city,state,zip,phone,events,hours,data_source_url,lastupdate,authority
+  lastupdate 2015-12-27
+
+smcgov.mgroff.csv:
+  County Manger's Staff
+  data_source_url: 
+  data_source_name: County Managers Staff
+  data_source_schema: 
+  lastupdate: 
+  Not CSV Yet
+
+smcgov.parks.csv:
+  San Mateo County Parks
+  data_source_url:library: file://home/harker/parks
+  data_source_name:library: San Mateo County Parks, scraped data
+  data_source_schema:library: org_fquid,org_name_short,org_name_long,contact,phone,address,city,state,zip,hours,homepage,email,fax,parking,parkingHours,playground,picnic,bathrooms,dogs,url-reg,url1,url2,url3,description,activities,details,facilities,notes,trail
+  lastupdate 2015-11-01
+
+smcgov-services.csv:
+  San Mateo County Services
+  data_source_url: http://www.smcgov.org/
+  data_source_name: San Mateo County Services
+  data_source_schema: 
+  lastupdate: 
+  Not CSV Yet
+
+smcgov.stats.csv:
+  San Mateo County information
+  data_source_url: 
+  data_source_name: San Mateo County information
+  data_source_schema: 
+  lastupdate: 
+  Not CSV yet
+
+smcoe.dist.codes.csv:
+  San Mateo County Office of Education district/school codes from CA CDE
+  data_source_url: http://www:cde.ca.gov
+  data_source_name: Calif Dept of Education dump of all districts and schools
+  data_source_schema:
+  lastupdate: 2015-12-29
+
+smcoe.info.json:
+  Entry for SM County Office of Education, lots of interesting data
+  data_source_url: http://www.cde.ca.gov/re/sd/details.asp?cds=41104130000000&public=Y
+  data_source_name: California School Directory, District: San Mateo County Office of Education
+  data_source_schema: Single row CVS
+  lastupdate: 
+ca.clerks.csv:
+  data_source_url: http://ca.gov/HomeFamily/Marriage/Recorders-Clerks.html
+  data_source_name: County Recorders/Clerks
+  data_source_schema: org_fquid,org_uid,county,org_name_short,org_name_long,homepage,data_source_url,lastupdate,authorative
+  lastupdate: 2015-12-19
+
+ca.gov.agencies.csv:
+  data_source_url: http://ca.gov/Apps/Agencies.aspx
+  data_source_name: California State agencies
+  data_source_schema:
+  lastupdate: 2015-12-10
+  Not CSV yet
+
+ca.k-12.schools.csv:
+  data_source_url: http://www.cde.ca.gov
+  data_source_name: Calif Dept of Education dump of all districts and schools
+  data_source_schema:
+  lastupdate:
+
+ca.k-12.schools.schema.csv:
+  data_source_url: http:gwww.cde.ca.govdssidsfspubschls.asp
+  data_source_name: File Structure: Public Schools Database
+  data_source_schema: Field Name,Field Type,Width,Description
+  lastupdate:
+
+us.ca.bayarea.csv:
+  data_source_url: https://data.smcgov.org/Government/Public-Non-Profit-and-Private-Service-Locations/iytx-vyie
+  data_source_name: Public, Non-Profit, and Private Service Locations
+  data_source_schema:
+  lastupdate: bad data
+
+us.ca.co.csv:
+  data_source_url: http://www.calafco.org/index.php/about-us/member-lafcos
+  data_source_name: CALAFCo county names
+  data_source_schema: 01_org_fquid,02_org_name_long,03_servicetype,04_agencytype,05_parentdepricated,06_phone,07_homepage,08_email,09_streetaddress,10_city,11_state,12_zip,13_Comments,foo,15_authorative,16_org_uid,17_org_name_short,foo2,19_resp_person,21_resp_title,20_fax,21_image,22_tags,23_services_offered,24_more_data,25_service_region,Y6_text1,Y7_text2,Y8_text3,Y9_text4,30_text5,31_text6,32_text7,33_text8,34_text9,35_text10,36_data_source,37_lastupdate,38_Location1
+  lastupdate: 2015-12-24
+
+us.ca.gov.csv:
+  data_source_url: hand scraped
+  data_source_name: Calif CDE
+  data_source_schema:
+  lastupdate: 
+
+us.ca.lafco.csv:
+  data_source_url:http://www.calafco.org/index.php/about-us/member-lafcos
+  data_source_name: County LAFCos
+  data_source_schema:
+  lastupdate: 2015-12-24
+
+us.ca.lafco.glossery.csv:
+  data_source_url: http:www.santacruzlafco.orgdefinitions
+  data_source_name: Definitions of Common LAFCO and Planning Terms
+  data_source_schema: org_fquid,org_uid,term,definition,data_source_url,lastupdate,authoratative
+  lastupdate: 2015-12-27
+
+us.naics.codes.csv:
+  data_source_url: http://www.naics.com/naicswp2014/wp-content/uploads/2014/10/NAICS-to-SIC-Crosswalk.pdf
+  data_source_name: 2012 NAICS to SIC Crosswalk
+  data_source_schema: 
+  org_fquid,org_uid,naics_description,sic,sic_description,data_source_url,lastupdate,authoratative
+  lastupdate: 2015-12-23
+  
+us.opendata.portalsus.csv:
+  data_source_url: http://harker.com/OpenData/socrata-data-portals.html
+  data_source_name: Socrata Open Data Portals by Robert Harker
+  data_source_schema: 
+  lastupdate: 2015-08-31
+  Not CVS yet
+  
+us.states.csv:
+  data_source_url: https://en.wikipedia.org/wiki/List_of_U.S._state_abbreviations
+  data_source_name: List of U.S. state abbreviations
+  data_source_schema: org_fquid,org_uid,org_name_short,org_name_long,type,data_source_url,lastupdate,authoritative
+  lastupdate: 2015-12-28
+  
