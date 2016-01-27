@@ -1,0 +1,44 @@
+Code For America (CfA)						R. Harker
+Request for Comments: openN11                                   January 2016
+
+
+        openN11 Directory Services (openN11):
+                   Definitions and Document Framework
+
+Abstract
+
+   This document is one of a collection that, together, describe the
+   protocol and usage context for a revision of Internationalized Domain
+   Names for Applications (openN11), superseding the earlier version.  It
+   describes the document collection and provides definitions and other
+   material that are common to the set.
+
+Status of This Memo
+
+   This is an Internet Standards Track document.
+
+Table of Contents
+
+ 1.  Introduction
+     1.1.  openN11
+This document is one of a collection that, together, describe the
+   protocol and usage context for a revision of Internationalized Domain
+   Names for Applications (openN11) 
+       1.1.1.  Audiences 
+       1.1.2.  Normative Language
+ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119 [RFC2119].
+     1.2.  Road Map of openN11 Documents
+   openN11 consists of the following documents:
+   2.  Definitions and Terminology 
+     2.1.  Characters and Character Sets 
+     2.2.  DNS-Related Terminology 
+     2.3.  Terminology Specific to openN11
+   3.  IANA Considerations 
+   4.  Security Considerations 
+   5.  Acknowledgments 
+   6.  References
+
+
+
