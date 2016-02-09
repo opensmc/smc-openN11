@@ -1,0 +1,43 @@
+Hi, I am Robert Harker.  I am one of the founders of the new San Mateo Code for America (CfA) Brigade, OpenSMC, opensmc.org, which meets every Tuesday in Red Wood City for a hacknight.
+
+My background is web farm wrangler as a gray beard Linux/SunOS sysadmin.  Managing a farm of servers as a single entity using configuration management, automation and monitoring tools.  Not 50, 100, 500 individual servers but as a single large farm with a few different types/roles.  I have been the Ops side of DevOps for most of my 30+ yr career.  I became involved in Government Open Data last summer with the San Mateo County's Open Data portal, data.smcgov.org.
+
+My interest in data is the back end indexing, storing and managing of the data.  Right now Open Data is like the old wild west which was a wasteland.  Small oasis separated by miles of desolate space.
+
+The question I am trying to answer is "how do apps find ordinary, day to day information on an Open Data portal?  For an organization or location things like services provided, location address, lat/long, hours, homepage, phone, accessibility, parking, closest bus stop, etc...  What I call "base level data". 
+
+Right now this information is locked in to a series of separate unrelated datasets.  siloed data.
+
+I have my own CfA OpenSMC project I call openN11.  It is a universal service directory. So far it is a Solo project and mostly exploratory work on my part.  I have a lot of big ideas and a bunch of written notes:
+  https://github.com/opensmc/smc-openN11
+
+I have a mock-up dataset with "f-quids".
+  https://data.smcgov.org/Government/RLH_open211/mg6f-byut
+Go to row 230 for City of San Mateo data.
+
+The important feature is the first column, the Fully Qualified UID or f-quid.  It is an index to locate different data types or data sources in an organized hierarchy.
+Most of the data is from a GIS map layer.  What looked like the Rolodex for San Mateo County Human Services.  Eclectic.  I have added state/county/city information to create an f-quid index framework.
+
+I have also been scraping data for San Mateo County and the state in general:
+https://github.com/opensmc/smc-open211-data
+
+I am working on a simple prototype API server / NoSQL json data store.  The problem is I need to learn Ruby first :-)  But I have written some working json/csv parsing code.
+
+The OpenSMC brigade is working on an easy to modify service locator mobile app using the JavaScript Cordova framework.  This will be the pilot project for my open211 dataset.
+
+My long term goal is to replace the database back-end of the mature CfA Ohana project.  My goal is to use its administrative console to allow various users/departments to manage their data.  Allow them to add new records, update records, add additional information.  The problem is Ohana is written in Ruby and I have to learn how to program in Ruby :-)  Yes, I have a bit of nerve.
+
+I have come up with a quote that describes the problem I am trying to solve:
+
+  "Applications should not require Google type intelligence
+    to find the common day to day information (data) that they want to display."
+    Robert Harker
+
+Personal profile:
+I am a Palo Alto native semi-retired in my late 50's.  I have seen the valley change from the "Valley of Hearts Delight" to the Silicon Valley.  I studied geology in college.  Specifically Faulting, Earthquakes and Geomorphology, the study of the landscape.  I spent my junior high school years learning about the baylands and marsh ecology.  I have a long term interest in Urban Planning starting with reading "Design with Nature" in the 6th grade and making a city of the future based on its principles.  I read the Palo Alto 1969 Master Plan where the City decided to keep the foothills as open space.  I am a local history buff.  Peninsula history, Bay Area history, California history.  I love it all.
+
+I am a 2ed wave feminist.  I am concerned about the brogramer and gamergate culture in the tech industry.  I have seen too many women leave the industry because they get tired of waiting for the boys to grow into men.
+
+I am at an interesting point in my life watching a younger generation assuming the roles I used to hold.  It is a good time to try a career change.  Government Open Data will be a major revolution in how government organizations work.  We are on the ground floor.
+
+I am very pleased to see younger people, both women and men, contributing important work and interesting ideas to companies and organizations.  Taking on responsible leadership roles.
