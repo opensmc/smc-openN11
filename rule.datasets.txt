@@ -1,0 +1,15 @@
+The rules about datasets
+
+The basis premmis is that we want all the data to be public.
+
+Requrements for default dataset should be minimal:
+5 items max
+"less is more"
+
+All data should be accepted:
+  Defualt dataset: hundreds of standard data fields
+  Extended dataset: Addititional data availble
+
+
+The required default data fields should be no more than nesscary to uniquiely identify the item.
+
