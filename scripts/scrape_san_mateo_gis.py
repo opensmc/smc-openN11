@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 """
 So, this requires lxml, argparse, and requests. Install it from standard
 via pip into a virtualenv and everything will go right. Maybe.
