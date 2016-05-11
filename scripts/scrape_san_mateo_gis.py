@@ -9,6 +9,11 @@ python scrape_san_mateo_gis.py 003417220 --outfile out.json
 It requires an APN and an --outfile, which puts things out into
 a JSON file.
 
+To use it in the case of inputing a file, and then printing out to the
+screen and to the file:
+
+python scripts/scrape_san_mateo_gis.py 003417220 --outfile out.json --input testfile.html --pretty_print
+
 I haven't extensively tested this, so it might break on some files.
 
 """
