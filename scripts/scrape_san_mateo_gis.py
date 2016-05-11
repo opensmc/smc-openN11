@@ -23,29 +23,41 @@ import argparse
 
 URL = ('http://gis.co.sanmateo.ca.us/countygis/applications/'
        'gisapp_PropReviewMap.asp')
+HEADER_XPATH = './/td[@class="textBlackBoldExtraSmall"]/text()'
+DATA_XPATH = './/td[@class="textBlackPlainExtraSmall"]/text()'
 
 
-def run(args):
-    session = requests.Session()
-    header_xpath = './/td[@class="textBlackBoldExtraSmall"]/text()'
-    data_xpath = './/td[@class="textBlackPlainExtraSmall"]/text()'
-    filename = args.outfile
+def get_html_text(input, apn):
+    """
+    If we have an input file, get the data from the input file.
+    If not grab it from the website via the APN.
+    """
     raw_text = None
-    apn = args.apn
-    if args.input is None:
+    if input is None:
         params = {'APN': apn, 'querytype': 'APNReview'}
         url = URL.format(apn)
+        session = requests.Session()
         req = session.get(url, params=params)
-        raw_text = req.text
-    else:
-        with open(args.input, 'r') as f:
-            raw_text = f.read()
+        return req.text
+    # If we have an input file, grab from it.
+    with open(input, 'r') as f:
+        return f.read()
+
+
+def run(outfile, apn, input=None):
+    """
+    Grab the HTML and then run it through some
+    lxml.html twisting.
+    """
+
+    raw_text = get_html_text(apn=apn, input=input)
     html = lxml.html.fromstring(raw_text)
     total_data = {}
+
     # First grab the results from every table.
     for table_entry in html.xpath('.//tr'):
-        header_res = table_entry.xpath(header_xpath)
-        data_res = table_entry.xpath(data_xpath)
+        header_res = table_entry.xpath(HEADER_XPATH)
+        data_res = table_entry.xpath(DATA_XPATH)
         if len(header_res) != 1 or len(data_res) != 1:
             # Nothing here
             continue
@@ -70,8 +82,8 @@ def run(args):
         logging.error('Error parsing for owner in APN {}'.format(apn))
         pass
 
-    if filename:
-        with open(filename, 'w') as f:
+    if outfile:
+        with open(outfile, 'w') as f:
             json.dump(total_data, f)
 
 
@@ -82,4 +94,4 @@ if __name__ == '__main__':
     parser.add_argument('--input', type=str,
                         help='Optional input file holding html')
     args = parser.parse_args()
-    run(args=args)
+    run(outfile=args.outfile, input=args.input, apn=args.apn)
