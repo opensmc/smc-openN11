@@ -44,7 +44,7 @@ def get_html_text(input, apn):
         return f.read()
 
 
-def run(outfile, apn, input=None):
+def run(outfile, apn, input=None, pretty_print=False):
     """
     Grab the HTML and then run it through some
     lxml.html twisting.
@@ -86,6 +86,17 @@ def run(outfile, apn, input=None):
         with open(outfile, 'w') as f:
             json.dump(total_data, f)
 
+    if pretty_print:
+        # Use the magic of JSON indentation.
+        print(
+            json.dumps(
+                total_data,
+                sort_keys=True,
+                indent=4,
+                separators=(',', ': ')
+            )
+        )
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Scrape GIS for SMC')
@@ -93,5 +104,8 @@ if __name__ == '__main__':
     parser.add_argument('--outfile', type=str, help='Output JSON file')
     parser.add_argument('--input', type=str,
                         help='Optional input file holding html')
+    parser.add_argument('--pretty_print', action='store_true',
+                        help='Print the JSON output', default=False)
     args = parser.parse_args()
-    run(outfile=args.outfile, input=args.input, apn=args.apn)
+    run(outfile=args.outfile, input=args.input,
+        apn=args.apn, pretty_print=args.pretty_print)
