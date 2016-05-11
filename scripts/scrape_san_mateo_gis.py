@@ -30,11 +30,17 @@ def run(args):
     header_xpath = './/td[@class="textBlackBoldExtraSmall"]/text()'
     data_xpath = './/td[@class="textBlackPlainExtraSmall"]/text()'
     filename = args.outfile
+    raw_text = None
     apn = args.apn
-    params = {'APN': apn, 'querytype': 'APNReview'}
-    url = URL.format(apn)
-    req = session.get(url, params=params)
-    html = lxml.html.fromstring(req.text)
+    if args.input is None:
+        params = {'APN': apn, 'querytype': 'APNReview'}
+        url = URL.format(apn)
+        req = session.get(url, params=params)
+        raw_text = req.text
+    else:
+        with open(args.input, 'r') as f:
+            raw_text = f.read()
+    html = lxml.html.fromstring(raw_text)
     total_data = {}
     # First grab the results from every table.
     for table_entry in html.xpath('.//tr'):
@@ -56,11 +62,11 @@ def run(args):
 
     # Get the owner
     try:
-        owner = req.text.split(
+        owner = raw_text.split(
             'Owner:'
         )[1].split('</TD>')[1].split('>')[1]
         total_data['Owner'] = owner
-    except:
+    except Exception as ex:
         logging.error('Error parsing for owner in APN {}'.format(apn))
         pass
 
@@ -73,5 +79,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Scrape GIS for SMC')
     parser.add_argument('apn', type=str, help='Single APN to parse')
     parser.add_argument('--outfile', type=str, help='Output JSON file')
+    parser.add_argument('--input', type=str,
+                        help='Optional input file holding html')
     args = parser.parse_args()
     run(args=args)
